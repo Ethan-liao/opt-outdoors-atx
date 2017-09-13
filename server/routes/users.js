@@ -1,20 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const knex = require('../db')
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-	// Comment out this line:
-  //res.send('respond with a resource');
-
-  // And insert something like this instead:
-  res.json([{
-  	id: 1,
-  	username: "samsepi0l"
-  }, {
-  	id: 2,
-  	username: "D0loresH4ze"
-  }]);
+  res.send('respond with a resource');
 });
 
+router.post('/', (req, res, next) => {
+  console.log('req:', req.body);
+  knex('users')
+    .where({email: req.body.email})
+    .returning('*')
+    .first()
+    .then(user => res.json(user))
+    // .catch(err => next(err))
+    .catch(function(error) {
+      console.error(error);
+    })
+});
 
 module.exports = router;

@@ -18,4 +18,4 @@ class UploadScreen extends React.Component {
   }
 }
 
-export default Event;
+export default UploadScreen;

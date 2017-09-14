@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,79 +8,62 @@ import axios from 'axios';
 import UploadScreen from './Uploadscreen';
 
 class Login extends Component {
-constructor(props){
-  super(props);
-  this.state={
-  email:'',
-  password:''
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    }
   }
- }
 
-handleClick(event){
-// var apiBaseUrl = "http://localhost:4000/api/";
-var self = this;
-var payload={
-"email":this.state.email,
-"password":this.state.password
-}
+  handleClick(event) {
+    event.preventDefault();
+    var self = this;
+    var payload = {
+      "email": this.state.email,
+      "password": this.state.password
+    }
 
-axios.post('/users', payload)
-.then(function (response) {
-console.log(response);
+    axios.post('/login', payload)
+    .then(function(response) {
+      console.log(response);
+      if (response.data.code === 200) {
+        console.log("Login successful");
+        var uploadScreen = [];
+        uploadScreen.push(<UploadScreen appContext={self.props.appContext}/>)
+        self.props.appContext.setState({loginPage: [], uploadScreen: uploadScreen}
+        )
+      } else if (response.data.code === 204) {
+        console.log("Username password do not match");
+        alert("username password do not match")
+      } else {
+        console.log("Username does not exist");
+        alert("Username does not exist");
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
 
-// if(response.data.code == 200){
-if(response.status === 200) {
-console.log("Login successfull");
-var uploadScreen=[];
-uploadScreen.push(<UploadScreen appContext={self.props.appContext}/>)
-self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
-}
-
-// else if(response.data.code == 204){
-else if(response.status === 204) {
-console.log("Username password do not match");
-alert("username password do not match")
-}
-else{
-console.log("Username does not exist");
-alert("Username does not exist");
-}
-})
-.catch(function (error) {
-console.log(error);
-});
-}
-
-render() {
+  render() {
     return (
       <div>
         <MuiThemeProvider>
           <div>
-          <AppBar
-             title="Login"
-           />
-           <TextField
-             hintText="Enter your Email"
-             floatingLabelText="Email"
-             onChange = {(event,newValue) => this.setState({email:newValue})}
-             />
-           <br/>
-             <TextField
-               type="password"
-               hintText="Enter your Password"
-               floatingLabelText="Password"
-               onChange = {(event,newValue) => this.setState({password:newValue})}
-               />
-             <br/>
-             <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-         </div>
-         </MuiThemeProvider>
+            <AppBar title="Login"/>
+            <TextField hintText="Enter your Email" floatingLabelText="Email" onChange= {(event,newValue) => this.setState({email:newValue})}/>
+            <br/>
+            <TextField type="password" hintText="Enter your Password" floatingLabelText="Password" onChange= {(event,newValue) => this.setState({password:newValue})}/>
+            <br/>
+            <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+          </div>
+        </MuiThemeProvider>
       </div>
     );
   }
 }
 const style = {
- margin: 15,
+  margin: 15
 };
 export default Login;
 
@@ -128,25 +111,25 @@ export default Login;
 //         console.log('error: ', error);
 //       });
 
-    // fetch('/users/', {
-    //   method: 'post',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({email: email, password: password})
-    // }).then(function(response) {
-    //   if (response.status >= 400) {
-    //     throw new Error('Bad respose from server');
-    //   }
-    //   // console.log(response.json());
-    //   return response.json();
-    // }).then(function(data) {
-    //   console.log('data: ', data);
-    //   this.setState({user: data})
-    // })
-    // .catch(function(error) {
-    //   console.error(error);
-    // });
+// fetch('/users/', {
+//   method: 'post',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({email: email, password: password})
+// }).then(function(response) {
+//   if (response.status >= 400) {
+//     throw new Error('Bad respose from server');
+//   }
+//   // console.log(response.json());
+//   return response.json();
+// }).then(function(data) {
+//   console.log('data: ', data);
+//   this.setState({user: data})
+// })
+// .catch(function(error) {
+//   console.error(error);
+// });
 
 //   }
 //

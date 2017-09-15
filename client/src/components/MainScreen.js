@@ -1,9 +1,10 @@
 // Add layout main page here
 import React from 'react';
 // import { Media } from 'react-bootstrap'
+import axios from 'axios';
 
 import Event from './Event';
-import axios from 'axios';
+import Header from './Header';
 
 class MainScreen extends React.Component {
   constructor(props) {
@@ -19,7 +20,6 @@ class MainScreen extends React.Component {
   }
 
   componentWillMount() {
-
     // set events state to equal all the events
     // loop through the state object and return each event
 
@@ -48,12 +48,13 @@ class MainScreen extends React.Component {
   render() {
     return (
       <div>
+        <Header></Header>
         <h3>Upcoming Events:</h3>
         <div>
             {
               Object
               .keys(this.state.events)
-              .map(key => <Event key={key} index={key} details={this.state.events[key]}/>)
+              .map(key => <Event key={key} index={key} details={this.state.events[key]} parentContext={this} appContext={this.props.appContext}/>)
             }
         </div>
       </div>

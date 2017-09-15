@@ -24,7 +24,8 @@ router.post('/', (req, res, next) => {
         console.log('match!', result);
         res.send({
           "code": 200,
-          "success": "login successful"
+          "success": "login successful",
+          "user": exists
         })
       })
       .catch(bcrypt.MISMATCH_ERROR, (result) => {

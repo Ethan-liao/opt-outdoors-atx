@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 
-import UploadScreen from './Uploadscreen';
+import MainScreen from './MainScreen';
 
 class Login extends Component {
   constructor(props) {
@@ -26,13 +26,19 @@ class Login extends Component {
 
     axios.post('/login', payload)
     .then(function(response) {
-      console.log(response);
       if (response.data.code === 200) {
         console.log("Login successful");
-        var uploadScreen = [];
-        uploadScreen.push(<UploadScreen appContext={self.props.appContext}/>)
-        self.props.appContext.setState({loginPage: [], uploadScreen: uploadScreen}
-        )
+        let user = {
+          id: response.data.user.id,
+          admin: response.data.user.admin,
+          email: response.data.user.email,
+          first: response.data.user.first,
+          last: response.data.user.last,
+        };
+        // console.log("user: ", user);
+        var mainScreen = [];
+        mainScreen.push(<MainScreen appContext={self.props.appContext} user={user}/>)
+        self.props.appContext.setState({loginPage: [], mainScreen: mainScreen})
       } else if (response.data.code === 204) {
         console.log("Username password do not match");
         alert("username password do not match")
@@ -50,7 +56,7 @@ class Login extends Component {
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar title="Login"/>
+            <AppBar title="Opt Outdoors ATX"/>
             <TextField hintText="Enter your Email" floatingLabelText="Email" onChange= {(event,newValue) => this.setState({email:newValue})}/>
             <br/>
             <TextField type="password" hintText="Enter your Password" floatingLabelText="Password" onChange= {(event,newValue) => this.setState({password:newValue})}/>

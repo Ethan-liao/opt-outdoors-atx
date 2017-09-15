@@ -50,7 +50,7 @@ class Register extends Component {
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar title="Register"/>
+            <AppBar title="Opt Outdoors ATX"/>
             <TextField hintText="Enter your First Name" floatingLabelText="First Name" onChange= {(event,newValue) => this.setState({first_name:newValue})}/>
             <br/>
             <TextField hintText="Enter your Last Name" floatingLabelText="Last Name" onChange= {(event,newValue) => this.setState({last_name:newValue})}/>

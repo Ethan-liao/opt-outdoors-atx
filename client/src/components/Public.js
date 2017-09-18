@@ -21,7 +21,7 @@ class Public extends React.Component {
     axios.get('/events')
     .then((response) => {
       let events = response.data.events;
-      let obj = {}
+      let obj = {};
       events.forEach((event) => {
         obj[event.id] = event;
       })

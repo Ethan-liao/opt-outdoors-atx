@@ -41,7 +41,8 @@ class Main extends React.Component {
           {/* <Route exact path='/' component={Public}/> */}
           <Route exact path='/' render={ ()  => <Public {...this.state}/> }/>
           <Route exact path='/login' component={Login}/>
-          <Route path='/home' component={Home}/>
+          <Route exact path='/home' component={Home}/>
+          {/* <Route exact path='/home' render={ ()  => <Home /> }/> */}
         </Switch>
       </main>
     )

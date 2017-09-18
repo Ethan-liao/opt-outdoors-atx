@@ -1,11 +1,11 @@
 import React from 'react';
 
-class Navigation extends React.Component {
+class PublicNav extends React.Component {
   constructor(props) {
     super(props);
 
     // this.state = {
-    //   state: this.props
+    //
     // }
   }
 
@@ -20,16 +20,7 @@ class Navigation extends React.Component {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="">Add Event</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="">My Events</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="">Settings</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="">Log Out</a>
+                <a className="nav-link" href="">Sign In</a>
               </li>
             </ul>
           </div>
@@ -39,4 +30,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+export default PublicNav;

@@ -17,8 +17,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navigation />
-        <Main />
+        <Navigation {...this.state}/>
+        <Main {...this.state}/>
       </div>
     )
   }

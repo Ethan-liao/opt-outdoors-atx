@@ -4,20 +4,48 @@ import Public from './Public';
 import Login from './Login';
 import Home from './Home';
 
-const Main = () => (
-  // The Switch will iterate over its children elements (the routes) and only
-  // render the first one that matches the current pathname
+// const Main = () => (
+//   // The Switch will iterate over its children elements (the routes) and only
+//   // render the first one that matches the current pathname
+//
+//   // When a route with a component prop matches, the route will return a
+//   // new element whose type is the provided React component
+//
+//   <main>
+//     <Switch>
+//       {/* <Route exact path='/' component={Public}/> */}
+//       <Route exact path='/' render={ ()  => <Public {...this.state}/> }/>
+//       <Route exact path='/login' component={Login}/>
+//       <Route path='/home' component={Home}/>
+//     </Switch>
+//   </main>
+// )
+//
+// export default Main
 
-  // When a route with a component prop matches, the route will return a
-  // new element whose type is the provided React component
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    }
 
-  <main>
-    <Switch>
-      <Route exact path='/' component={Public}/>
-      <Route exact path='/login' component={Login}/>
-      <Route path='/home' component={Home}/>
-    </Switch>
-  </main>
-)
+    state = {
+      login: this.props.login,
+      user: this.props.user,
+      events: this.props.events
+    }
 
-export default Main
+  render() {
+    return (
+      <main>
+        <Switch>
+          {/* <Route exact path='/' component={Public}/> */}
+          <Route exact path='/' render={ ()  => <Public {...this.state}/> }/>
+          <Route exact path='/login' component={Login}/>
+          <Route path='/home' component={Home}/>
+        </Switch>
+      </main>
+    )
+  }
+}
+
+export default Main;

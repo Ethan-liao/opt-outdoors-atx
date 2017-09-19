@@ -54,6 +54,7 @@ class Login extends React.Component {
 
     axios.post('/login', payload)
     .then(response => {
+      console.log('login response:', response);
       if (response.data.code === 200) {
         console.log("Login successful");
         let user = {

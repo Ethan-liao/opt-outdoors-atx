@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 import Event from './Event';
 import Navigation from './Navigation';
 
@@ -17,21 +19,35 @@ class Home extends React.Component {
     // make api call to get all the events from db
     // returns an array of events
     // sets the state
-    axios.get('/events')
+    axios.get('/privateEvents')
     .then(response => {
-      let events = response.data.events;
-      let obj = {};
-      events.forEach((event) => {
-        obj[event.id] = event;
-      })
-      this.setState({ events : obj});
-      console.log(this.state.events);
+      if (response.data.code === 200) {
+        console.log("User has access to this page");
+        let events = response.data.events;
+        let obj = {};
+        events.forEach((event) => {
+          obj[event.id] = event;
+        })
+        this.setState({ events : obj});
+        console.log(this.state.events);
+      } else if (response.data.code === 204) {
+        console.log("User does not have access to this page");
+        this.setState({ redirect : true})
+      } else {
+        console.log("Unknown error code received");
+        this.setState({ redirect : true})
+      }
     }).catch(function(error) {
       console.log(error);
     });
-  }
+    }
 
   render() {
+    if (this.state.redirect) {
+      return (<Redirect to={{
+        pathname: "/"
+      }} />)
+    }
     return (
       <div>
         <Navigation></Navigation>

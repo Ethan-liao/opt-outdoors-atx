@@ -18,10 +18,14 @@ router.post('/', (req, res, next) => {
   .returning('*')
   .then((exists) => {
     if (exists) {
-      console.log('exists:', exists);
       bcrypt.compare(password, exists.password)
       .then((result) => {
-        console.log('match!', result);
+        req.session.id = exists.id;
+        req.session.first = exists.first;
+        req.session.last = exists.last;
+        req.session.email = exists.email;
+        req.session.admin = exists.admin;
+        console.log('login success. session set:',req.session);
         res.send({
           "code": 200,
           "success": "login successful",

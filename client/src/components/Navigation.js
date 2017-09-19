@@ -1,15 +1,40 @@
 import React from 'react';
+import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   state: this.props
-    // }
+    this.state = {
+      redirect: false
+    }
+    this.logout = this.logout.bind(this);
   }
 
+  logout(e) {
+    e.preventDefault();
+    axios.get('/logout')
+    .then(response => {
+      if (response.data.code === 200) {
+        console.log("User has logged out");
+        this.setState({ redirect : true})
+      } else {
+        console.log("Unknown error code received");
+        this.setState({ redirect : true})
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
+    }
+
   render() {
+    if (this.state.redirect) {
+      return (<Redirect to={{
+        pathname: "/"
+      }} />)
+    }
+
     return (
       <div>
         <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -29,7 +54,7 @@ class Navigation extends React.Component {
                 <a className="nav-link" href="">Settings</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="">Log Out</a>
+                <a onClick={this.logout} className="nav-link" href="">Log Out</a>
               </li>
             </ul>
           </div>

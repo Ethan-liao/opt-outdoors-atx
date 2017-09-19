@@ -9,16 +9,22 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = props.location.state;
+    // this.state = props.location.state;
+    // this.state[redirect] = false
+    this.state = {
+      events: {}
+    }
+
   }
 
   componentWillMount() {
     // set events state to equal all the events
     // loop through the state object and return each event
-
+    //
     // make api call to get all the events from db
     // returns an array of events
     // sets the state
+
     axios.get('/privateEvents')
     .then(response => {
       if (response.data.code === 200) {
@@ -40,14 +46,14 @@ class Home extends React.Component {
     }).catch(function(error) {
       console.log(error);
     });
-    }
+  }
 
   render() {
-    if (this.state.redirect) {
-      return (<Redirect to={{
-        pathname: "/"
-      }} />)
-    }
+    // if (this.state.redirect) {
+    //   return (<Redirect to={{
+    //     pathname: "/"
+    //   }} />)
+    // }
     return (
       <div>
         <Navigation></Navigation>

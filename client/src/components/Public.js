@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Event from './Event';
+import PublicEvent from './PublicEvent';
 import PublicNavigation from './PublicNavigation';
 
 class Public extends React.Component {
@@ -42,7 +42,7 @@ class Public extends React.Component {
             {
               Object
               .keys(this.state.events)
-              .map(key => <Event key={key} index={key} details={this.state.events[key]}/>)
+              .map(key => <PublicEvent key={key} index={key} details={this.state.events[key]}/>)
             }
           </div>
         </div>

@@ -1,15 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      redirect: false
+      redirect: false,
+      goHome: false
     }
     this.logout = this.logout.bind(this);
+    this.goHome = this.goHome.bind(this);
   }
 
   logout(e) {
@@ -26,12 +28,23 @@ class Navigation extends React.Component {
     }).catch(function(error) {
       console.log(error);
     });
-    }
+  }
+
+  goHome(e) {
+    e.preventDefault();
+    this.setState({goHome : true})
+  }
 
   render() {
     if (this.state.redirect) {
       return (<Redirect to={{
         pathname: "/"
+      }} />)
+    }
+
+    if (this.state.goHome) {
+      return (<Redirect to={{
+        pathname: "/home"
       }} />)
     }
 
@@ -41,7 +54,8 @@ class Navigation extends React.Component {
           <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <a className="navbar-brand" href="">Opt Outdoors ATX</a>
+          {/* <a className="navbar-brand" href="">Opt Outdoors ATX</a> */}
+          <a onClick={this.goHome} className="navbar-brand" href="">Opt Outdoors ATX</a>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">

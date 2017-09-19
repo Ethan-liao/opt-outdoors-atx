@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Event from './Event';
+import Navigation from './Navigation';
 
 class Home extends React.Component {
   constructor(props) {
@@ -33,9 +34,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          Home Page!
-        </div>
+        <Navigation></Navigation>
         <div>
           <h3>Upcoming Events:</h3>
           <div>

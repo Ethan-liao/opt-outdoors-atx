@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+import PublicNavigation from './PublicNavigation';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,29 @@ class Login extends React.Component {
 
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+  }
+
+  handleRegister(event) {
+    event.preventDefault();
+    //To be done === check for empty values before hitting submit
+
+    var payload = {
+      "first": this.state.firstName,
+      "last": this.state.lastName,
+      "email": this.state.newEmail,
+      "password": this.state.newPassword
+    }
+
+    axios.post('/register', payload)
+    .then(function(response) {
+      console.log('response from db:', response);
+      if (response.status === 200) {
+        console.log("registration successful");
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
   }
 
   handleSignIn(event) {
@@ -74,6 +99,7 @@ class Login extends React.Component {
     }
     return (
       <div>
+        <PublicNavigation></PublicNavigation>
         <div>
           Sign In:
           <form onSubmit={this.handleSignIn}>
@@ -83,14 +109,14 @@ class Login extends React.Component {
             </div>
             <div className="form-group">
               <label for="formGroupExampleInput2">Password</label>
-              <input name="password" type="text" className="form-control" id="formGroupExampleInput2" onChange={this.handleInputChange}/>
+              <input name="password" type="password" className="form-control" id="formGroupExampleInput2" onChange={this.handleInputChange}/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </div>
         <div>
           Register:
-          <form>
+          <form onSubmit={this.handleRegister}>
             <div className="form-group">
               <label for="formGroupExampleInput">First Name</label>
               <input name="firstName" type="text" className="form-control" id="formGroupExampleInput" onChange={this.handleInputChange}/>
@@ -105,7 +131,7 @@ class Login extends React.Component {
             </div>
             <div className="form-group">
               <label for="formGroupExampleInput2">Password</label>
-              <input name="newPassword" type="text" className="form-control" id="formGroupExampleInput2" onChange={this.handleInputChange}/>
+              <input name="newPassword" type="password" className="form-control" id="formGroupExampleInput2" onChange={this.handleInputChange}/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>

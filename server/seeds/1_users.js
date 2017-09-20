@@ -1,35 +1,37 @@
-const userList = require('../sample_data/users');
-// const bcrypt = require('bcrypt-as-promised');
-//
-// console.log('test', test(userList));
-//
-// function test(array) {
-//   console.log('hit1');
-//   array.forEach((user) => {
-//     console.log('user: ', user['password']);
-//     user.password = hashed(user.password);
-//     console.log('user2', user);
-//   });
-//   return array;
-// }
-//
-// function hashed(password) {
-//   console.log('hit2');
-//   return bcrypt.hash(password, 10)
-//   .then((result) => {
-//     console.log(result);
-//     return result;
-//   })
-//   .catch((result) => {
-//     console.log('error');
-//     return result;
-//   })
-// }
+const bcrypt = require('bcrypt-as-promised');
+const saltRounds = 10;
+const userPassword = 'test'
 
-
-exports.seed = function (knex) {
-  return knex('users')
-    .del()
-    .then(() => knex('users').insert(userList));
-    // .then(() => knex('users').insert(test(userList)));
+exports.seed = (knex, Promise) => {
+  // Deletes ALL existing entries
+  return knex('users').del()
+  .then(() => {
+    return Promise.all([
+      // Inserts seed entries
+      bcrypt.hash(userPassword, saltRounds).then(digest =>
+        knex('users').insert({
+          first: 'Daniel',
+          last: 'Isham',
+          email: 'danielisham1@gmail.com',
+          password: digest,
+          admin: true
+      })),
+      bcrypt.hash(userPassword, saltRounds).then(digest =>
+        knex('users').insert({
+          first: 'Michael',
+          last: 'Smith',
+          email: 'example1@gmail.com',
+          password: digest,
+          admin: false
+      })),
+      bcrypt.hash(userPassword, saltRounds).then(digest =>
+        knex('users').insert({
+          first: 'David',
+          last: 'Johnson',
+          email: 'example2@gmail.com',
+          password: digest,
+          admin: false
+      }))
+    ]);
+  });
 };

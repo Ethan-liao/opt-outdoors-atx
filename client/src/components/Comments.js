@@ -10,7 +10,7 @@ class Comments extends React.Component {
     return (
       <div>
         <p>{this.props.details.content}</p>
-        <p>Posted by: {this.props.details.user_id}</p>
+        <p><small><i>Posted by: {this.props.details.first} {this.props.details.last}</i></small></p>
       </div>
     )
   }

@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.string('activity').notNullable().defaultTo('');
     table.string('title').notNullable().defaultTo('');
     table.text('description').notNullable().defaultTo('');
-    table.string('organizer').notNullable().defaultTo('');
+    table.integer('organizer').references('id').inTable('users').notNullable();
     table.text('image_url').notNullable().defaultTo('');
     table.date('date').notNullable();
     table.text('location').notNullable().defaultTo('');

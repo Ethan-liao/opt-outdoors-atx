@@ -105,12 +105,12 @@ class Login extends React.Component {
           Sign In:
           <form onSubmit={this.handleSignIn}>
             <div className="form-group">
-              <label for="formGroupExampleInput">Email</label>
-              <input name="email" type="text" className="form-control" id="formGroupExampleInput" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
+              <label htmlFor="email">Email</label>
+              <input name="email" type="text" className="form-control" id="email" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group">
-              <label for="formGroupExampleInput2">Password</label>
-              <input name="password" type="password" className="form-control" id="formGroupExampleInput2" onChange={this.handleInputChange}/>
+              <label htmlFor="password">Password</label>
+              <input name="password" type="password" className="form-control" id="password" onChange={this.handleInputChange}/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
@@ -119,20 +119,20 @@ class Login extends React.Component {
           Register:
           <form onSubmit={this.handleRegister}>
             <div className="form-group">
-              <label for="formGroupExampleInput">First Name</label>
-              <input name="firstName" type="text" className="form-control" id="formGroupExampleInput" onChange={this.handleInputChange}/>
+              <label htmlFor="firstName">First Name</label>
+              <input name="firstName" type="text" className="form-control" id="firstName" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group">
-              <label for="formGroupExampleInput">Last Name</label>
-              <input name="lastName" type="text" className="form-control" id="formGroupExampleInput" onChange={this.handleInputChange}/>
+              <label htmlFor="lastName">Last Name</label>
+              <input name="lastName" type="text" className="form-control" id="lastName" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group">
-              <label for="formGroupExampleInput">Email</label>
-              <input name="newEmail" type="text" className="form-control" id="formGroupExampleInput" onChange={this.handleInputChange}/>
+              <label htmlFor="newEmail">Email</label>
+              <input name="newEmail" type="text" className="form-control" id="newEmail" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group">
-              <label for="formGroupExampleInput2">Password</label>
-              <input name="newPassword" type="password" className="form-control" id="formGroupExampleInput2" onChange={this.handleInputChange}/>
+              <label htmlFor="newPassword">Password</label>
+              <input name="newPassword" type="password" className="form-control" id="newPassword" onChange={this.handleInputChange}/>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>

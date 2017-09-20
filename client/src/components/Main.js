@@ -4,6 +4,7 @@ import Public from './Public';
 import Login from './Login';
 import Home from './Home';
 import EventPage from './EventPage';
+import AddEvent from './AddEvent';
 import NotFound from './NotFound';
 
 // The Switch will iterate over its children elements (the routes) and only
@@ -38,6 +39,7 @@ class Main extends React.Component {
           <Route exact path='/home' render={ ()  => <Home {...this.state}/> }/>
           {/* <Route exact path='/home' component={Home}/> */}
           <Route exact path='/event/:id' component={EventPage}/>
+          <Route exact path='/add' component={AddEvent}/>
           <Route component={NotFound}/>
         </Switch>
       </main>

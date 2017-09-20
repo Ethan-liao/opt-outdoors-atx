@@ -55,11 +55,13 @@ class Navigation extends React.Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           {/* <a className="navbar-brand" href="">Opt Outdoors ATX</a> */}
-          <a onClick={this.goHome} className="navbar-brand" href="">Opt Outdoors ATX</a>
+          {/* <a onClick={this.goHome} className="navbar-brand" href="">Opt Outdoors ATX</a> */}
+          <Link to="/home" className="navbar-brand">Opt Outdoors ATX</Link>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="">Add Event</a>
+                <Link to="/add" className="nav-link">Add Event</Link>
+                {/* <a className="nav-link" href="">Add Event</a> */}
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="">My Events</a>

@@ -1,18 +1,108 @@
 import React from 'react';
+import Navigation from './Navigation';
+import axios from 'axios';
 
 class AddEvent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-
+      "activity": 'hiking',
+      "title": '',
+      "description": '',
+      "organizer": '',
+      "image_url": '',
+      "date": '',
+      "location": ''
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let payload = {
+      "activity": this.state.activity,
+      "title": this.state.title,
+      "description": this.state.description,
+      "image_url": this.state.image_url,
+      "date": this.state.date,
+      "location": this.state.location
+    };
+    axios.post('/event/add', payload)
+    .then(function(response) {
+      console.log('response from db:', response);
+      if (response.status === 200) {
+        console.log("event added");
+      } else {
+        console.log('error!');
+        console.log('response:', response);
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   render() {
     return (
       <div>
-
+        <Navigation></Navigation>
+        <div>
+          Add Event Details:
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group row">
+              <label for="activity" className="col-2 col-form-label">Activity</label>
+              <div className="col-10">
+                <select required name="activity" className="form-control" id="activity" onChange={this.handleInputChange}>
+                  <option selected>Hiking</option>
+                  <option>Trail Running</option>
+                  <option>Mountain Biking</option>
+                  <option>Road Biking</option>
+                  <option>Climbing</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label for="title" className="col-2 col-form-label">Title</label>
+              <div className="col-10">
+                <input required name="title" className="form-control" type="text" id="title" onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label for="description" className="col-2 col-form-label">Description</label>
+              <div className="col-10">
+                <textarea required name="description" className="form-control" id="description" rows="3" onChange={this.handleInputChange}></textarea>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label for="location" className="col-2 col-form-label">Location</label>
+              <div className="col-10">
+                <input required name="location" className="form-control" type="text" id="location" onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label for="date" className="col-2 col-form-label">Date</label>
+              <div className="col-10">
+                <input required name="date" className="form-control" type="date" id="date" onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label for="image_url" className="col-2 col-form-label">Image URL</label>
+              <div className="col-10">
+                <input required name="image_url" className="form-control" type="url" id="image_url" onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     )
   }

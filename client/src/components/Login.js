@@ -106,7 +106,7 @@ class Login extends React.Component {
           <form onSubmit={this.handleSignIn}>
             <div className="form-group">
               <label for="formGroupExampleInput">Email</label>
-              <input name="email"type="text" className="form-control" id="formGroupExampleInput" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
+              <input name="email" type="text" className="form-control" id="formGroupExampleInput" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
             </div>
             <div className="form-group">
               <label for="formGroupExampleInput2">Password</label>

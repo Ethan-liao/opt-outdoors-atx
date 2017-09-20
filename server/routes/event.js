@@ -16,7 +16,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/add', (req, res, next) => {
   console.log('body:', req.body);
   console.log('session:', req.session);
-  
+
   knex('events')
     .returning('id')
     .insert({
@@ -33,17 +33,20 @@ router.post('/add', (req, res, next) => {
       user_id: req.session.id,
       event_id: parseInt(id)
     }))
-    .returning('id')
-    .then((id) => {
-      console.log('new id', id);
+    .then(() => {
+      console.log('event addded');
       res.send({
        "code": 200,
        "success": "event added to db"
      })
     })
     .catch((err) => {
-      console.log(err);
-      next(err);
+      console.log('error, event not added', err);
+      res.send({
+        "code": 204,
+        "success": "Event not added."
+      });
+      // next(err);
     });
 });
 

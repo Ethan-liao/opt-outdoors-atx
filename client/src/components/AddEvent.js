@@ -1,6 +1,8 @@
 import React from 'react';
-import Navigation from './Navigation';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+
+import Navigation from './Navigation';
 
 class AddEvent extends React.Component {
   constructor(props) {
@@ -13,7 +15,8 @@ class AddEvent extends React.Component {
       "organizer": '',
       "image_url": '',
       "date": '',
-      "location": ''
+      "location": '',
+      "postSuccess": false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,11 +34,14 @@ class AddEvent extends React.Component {
       "location": this.state.location
     };
     axios.post('/event/add', payload)
-    .then(function(response) {
+    .then(response => {
       console.log('response from db:', response);
-      if (response.status === 200) {
+      if (response.data.code === 200) {
         console.log("event added");
-      } else {
+        this.setState({
+          postSuccess: true
+        })
+      } else if (response.data.code === 204) {
         console.log('error!');
         console.log('response:', response);
       }
@@ -51,6 +57,11 @@ class AddEvent extends React.Component {
   }
 
   render() {
+    if (this.state.postSuccess) {
+      return (<Redirect to={{
+        pathname: "/home"
+      }} />)
+    }
     return (
       <div>
         <Navigation></Navigation>

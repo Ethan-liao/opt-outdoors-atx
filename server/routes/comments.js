@@ -13,7 +13,6 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/:id', function(req, res, next) {
-  // console.log(req.session);
   knex('events_comments')
   .returning('*')
   .insert({

@@ -33,9 +33,6 @@ router.get('/:id/attendees', function(req, res, next) {
 });
 
 router.post('/add', (req, res, next) => {
-  console.log('body:', req.body);
-  console.log('session:', req.session);
-
   knex('events').returning('id').insert({
     activity: req.body.activity,
     title: req.body.title,
@@ -53,7 +50,6 @@ router.post('/add', (req, res, next) => {
   }).catch((err) => {
     console.log('error, event not added', err);
     res.send({"code": 204, "success": "Event not added."});
-    // next(err);
   });
 });
 
@@ -63,9 +59,7 @@ router.post('/:id/rsvp', (req, res, next) => {
   .where('user_id', Number.parseInt(req.session.id))
   .andWhere('event_id', Number.parseInt(req.params.id))
   .then((exists) => {
-    // console.log('exists:', exists[0]);
     if (!exists[0]) {
-      // console.log('user not registered yet');
       knex('events_users')
       .returning('*')
       .insert({
@@ -73,7 +67,6 @@ router.post('/:id/rsvp', (req, res, next) => {
         event_id: Number.parseInt(req.params.id)
       })
       .then((result) => {
-        // console.log('user registered for event');
         res.send({
           "code": 200,
           "attendee": result,
@@ -85,7 +78,6 @@ router.post('/:id/rsvp', (req, res, next) => {
       }).catch((err) => {
         console.log('error, attendee not added', err);
         res.send({"code": 204, "message": "error adding attendee to db"});
-        // next(err);
       });
     } else {
       res.send({"code": 204, "message": "attendee already registered"});
@@ -108,6 +100,22 @@ router.delete('/:id/leave', (req, res, next) => {
   }).catch((err) => {
     console.log('error, attendee not removed', err);
     res.send({"code": 204, "message": "error removing attendee from db"});
+  });
+});
+
+router.delete('/:id', (req, res, next) => {
+  let id = Number.parseInt(req.params.id);
+
+  knex('events_comments').where('event_id', id).del().then(() => {
+    knex('events_users').where('event_id', id).del().then(() => {
+      knex('events').where('id', id).del().then(() => {
+        console.log('event has been removed from db');
+        res.send({"code": 200, "message": "event has been removed from db"})
+      })
+    })
+  }).catch((err) => {
+    console.log('error, event not removed', err);
+    res.send({"code": 204, "message": "error removing event from db"});
   });
 });
 

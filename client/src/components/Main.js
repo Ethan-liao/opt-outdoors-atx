@@ -25,12 +25,6 @@ class Main extends React.Component {
     }
   }
 
-    // state = {
-    //   login: this.props.login,
-    //   user: this.props.user,
-    //   events: this.props.events
-    // }
-
   render() {
     return (
       <main>

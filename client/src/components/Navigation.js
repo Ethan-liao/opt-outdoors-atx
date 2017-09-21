@@ -61,14 +61,14 @@ class Navigation extends React.Component {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link to="/add" className="nav-link">Add Event</Link>
-                {/* <a className="nav-link" href="">Add Event</a> */}
               </li>
               <li className="nav-item dropdown">
                  <a className="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    My Events
                  </a>
                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                   <a className="dropdown-item" href="">Organizer</a>
+                   {/* <a className="dropdown-item" href="">Organizer</a> */}
+                   <Link to="/organized" className="dropdown-item">Organizer</Link>
                    <Link to="/attending" className="dropdown-item">Attendee</Link>
                    {/* <a className="dropdown-item" href="#">Attendee</a> */}
                  </div>

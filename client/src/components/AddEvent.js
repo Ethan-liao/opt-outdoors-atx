@@ -69,7 +69,7 @@ class AddEvent extends React.Component {
           Add Event Details:
           <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
-              <label for="activity" className="col-2 col-form-label">Activity</label>
+              <label htmlFor="activity" className="col-2 col-form-label">Activity</label>
               <div className="col-10">
                 <select required name="activity" className="form-control" id="activity" onChange={this.handleInputChange}>
                   <option selected>Hiking</option>
@@ -82,31 +82,31 @@ class AddEvent extends React.Component {
               </div>
             </div>
             <div className="form-group row">
-              <label for="title" className="col-2 col-form-label">Title</label>
+              <label htmlFor="title" className="col-2 col-form-label">Title</label>
               <div className="col-10">
                 <input required name="title" className="form-control" type="text" id="title" onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="form-group row">
-              <label for="description" className="col-2 col-form-label">Description</label>
+              <label htmlFor="description" className="col-2 col-form-label">Description</label>
               <div className="col-10">
                 <textarea required name="description" className="form-control" id="description" rows="3" onChange={this.handleInputChange}></textarea>
               </div>
             </div>
             <div className="form-group row">
-              <label for="location" className="col-2 col-form-label">Location</label>
+              <label htmlFor="location" className="col-2 col-form-label">Location</label>
               <div className="col-10">
                 <input required name="location" className="form-control" type="text" id="location" onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="form-group row">
-              <label for="date" className="col-2 col-form-label">Date</label>
+              <label htmlFor="date" className="col-2 col-form-label">Date</label>
               <div className="col-10">
                 <input required name="date" className="form-control" type="date" id="date" onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="form-group row">
-              <label for="image_url" className="col-2 col-form-label">Image URL</label>
+              <label htmlFor="image_url" className="col-2 col-form-label">Image URL</label>
               <div className="col-10">
                 <input required name="image_url" className="form-control" type="url" id="image_url" onChange={this.handleInputChange}/>
               </div>

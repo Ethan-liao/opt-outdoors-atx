@@ -12,9 +12,13 @@ class EventPage extends React.Component {
     this.state = {
       event: {},
       comments: {},
+      newComment: '',
       attendees: {},
       redirect: false
     }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.submitComment = this.submitComment.bind(this);
   }
 
   componentWillMount() {
@@ -23,7 +27,7 @@ class EventPage extends React.Component {
 
     axios.get(url).then(response => {
       if (response.data.code === 200) {
-        console.log('response:', response);
+        console.log('events response:', response);
         let event = response.data.event[0];
         this.setState({event: event});
       } else {
@@ -36,7 +40,7 @@ class EventPage extends React.Component {
 
     axios.get(`${url}/attendees`).then(response => {
       if (response.data.code === 200) {
-        console.log('response:', response);
+        console.log('attendees response:', response);
         let attendees = response.data.attendees;
         let obj = {};
         attendees.forEach((attendee) => {
@@ -52,19 +56,57 @@ class EventPage extends React.Component {
     });
 
     axios.get(`/comments/${eventID}`).then(response => {
-      console.log('response:', response);
+      console.log('comments response:', response.data.comments);
       let comments = response.data.comments;
       let obj = {};
       comments.forEach((comment) => {
-        obj[comment.id] = comment;
+        obj[comment.comment_id] = comment;
       })
-
       this.setState({comments: obj});
     }).catch(function(error) {
       console.log(error);
     });
-
   }
+
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  submitComment(event) {
+    event.preventDefault();
+    let payload = {
+      "content": this.state.newComment,
+      "event_id": this.state.event.id
+    };
+    axios.post(`/comments/${this.state.event.id}`, payload)
+    .then(response => {
+    // console.log('response from db:', response);
+    if (response.data.code === 200) {
+      // replicate the result of a comments-users join query
+      let test = response.data.comment[0];
+      test["admin"] = response.data.admin;
+      test["email"] = response.data.email;
+      test["first"] = response.data.first;
+      test["last"] = response.data.last;
+      // create copy of state, add new comment, update state
+      const comments = {...this.state.comments};
+      comments[response.data.comment[0].comment_id] = test;
+      // comments[response.data.comment[0].comment_id] = response.data.comment[0];
+      this.setState({
+        comments,
+        newComment: ''
+       })
+       // clear the comment form
+       this.refs.newComment.value = ''
+    } else if (response.data.code === 204) {
+      console.log('response:', response);
+    }
+  }).catch(function(error) {
+    console.log(error);
+  });
+}
 
   render() {
     let details = this.state.event;
@@ -91,7 +133,7 @@ class EventPage extends React.Component {
         <p>{details.first} {details.last} ({details.email})</p>
         <p><strong>Attendees ({Object.keys(this.state.attendees).length})</strong></p>
         <ul>
-          {Object.keys(this.state.attendees).map(key => <li>{this.state.attendees[key].first} {this.state.attendees[key].last}</li>)}
+          {Object.keys(this.state.attendees).map(key => <li key={key}>{this.state.attendees[key].first} {this.state.attendees[key].last}</li>)}
         </ul>
         <div>
           <p><strong>Comments:</strong></p>
@@ -100,10 +142,10 @@ class EventPage extends React.Component {
 }
           </div>
           <div>
-            <form>
+            <form onSubmit={this.submitComment}>
               <div className="form-group">
                 <label htmlFor="newComment">Leave a comment:</label>
-                <input name="newComment" type="text" className="form-control" id="newComment"/>
+                <input name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment"/>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>

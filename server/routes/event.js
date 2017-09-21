@@ -94,4 +94,21 @@ router.post('/:id/rsvp', (req, res, next) => {
   .catch(err => next(err))
 });
 
+router.delete('/:id/leave', (req, res, next) => {
+  knex('events_users')
+  .where('user_id', Number.parseInt(req.session.id))
+  .andWhere('event_id', Number.parseInt(req.params.id))
+  .del()
+  .then(() => {
+    console.log('attendee removed from event');
+    res.send({
+      "code": 200,
+      "message": "attendee removed from event"
+    })
+  }).catch((err) => {
+    console.log('error, attendee not removed', err);
+    res.send({"code": 204, "message": "error removing attendee from db"});
+  });
+});
+
 module.exports = router;

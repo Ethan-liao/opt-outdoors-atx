@@ -5,6 +5,8 @@ import Login from './Login';
 import Home from './Home';
 import EventPage from './EventPage';
 import AddEvent from './AddEvent';
+import EventsOrganized from './EventsOrganized';
+import EventsAttending from './EventsAttending';
 import NotFound from './NotFound';
 
 // The Switch will iterate over its children elements (the routes) and only
@@ -40,6 +42,8 @@ class Main extends React.Component {
           {/* <Route exact path='/home' component={Home}/> */}
           <Route exact path='/event/:id' component={EventPage}/>
           <Route exact path='/add' component={AddEvent}/>
+          <Route exact path='/organized' component={EventsOrganized}/>
+          <Route exact path='/attending' component={EventsAttending}/>
           <Route component={NotFound}/>
         </Switch>
       </main>

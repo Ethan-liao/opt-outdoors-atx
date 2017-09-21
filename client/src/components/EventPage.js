@@ -173,14 +173,13 @@ class EventPage extends React.Component {
             <form onSubmit={this.submitComment}>
               <div className="form-group">
                 <label htmlFor="newComment">Leave a comment:</label>
-                <input name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment"/>
+                <input required name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment"/>
               </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
         <button onClick={this.joinEvent} type="button" className="btn btn-primary">Join Event</button>
-        <button type="button" className="btn btn-primary">Leave Event</button>
       </div>
     )
   }

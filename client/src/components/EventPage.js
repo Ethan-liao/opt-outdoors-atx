@@ -19,6 +19,7 @@ class EventPage extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submitComment = this.submitComment.bind(this);
+    this.joinEvent = this.joinEvent.bind(this);
   }
 
   componentWillMount() {
@@ -102,11 +103,38 @@ class EventPage extends React.Component {
        this.refs.newComment.value = ''
     } else if (response.data.code === 204) {
       console.log('response:', response);
+    }})
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  joinEvent(event) {
+    event.preventDefault();
+    axios.post(`/event/${this.state.event.id}/rsvp`)
+    .then(response => {
+      if (response.data.code === 200) {
+        // replicate the result of a comments-users join query
+        let newAttendee = response.data.attendee[0];
+        newAttendee["admin"] = response.data.admin;
+        newAttendee["email"] = response.data.email;
+        newAttendee["first"] = response.data.first;
+        newAttendee["last"] = response.data.last;
+        // create copy of state, add new comment, update state
+        const attendees = {...this.state.attendees};
+        attendees[response.data.attendee[0].user_id] = newAttendee;
+        // comments[response.data.comment[0].comment_id] = response.data.comment[0];
+        this.setState({ attendees });
+         // clear the comment form
+         this.refs.newComment.value = ''
+      } else if (response.data.code === 204) {
+        console.log('response:', response);
+      }})
+      .catch(function(error) {
+        console.log(error);
+      });
     }
-  }).catch(function(error) {
-    console.log(error);
-  });
-}
+
 
   render() {
     let details = this.state.event;
@@ -151,7 +179,7 @@ class EventPage extends React.Component {
             </form>
           </div>
         </div>
-        <button type="button" className="btn btn-primary">Join Event</button>
+        <button onClick={this.joinEvent} type="button" className="btn btn-primary">Join Event</button>
         <button type="button" className="btn btn-primary">Leave Event</button>
       </div>
     )

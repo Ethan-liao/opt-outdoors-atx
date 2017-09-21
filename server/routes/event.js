@@ -57,4 +57,41 @@ router.post('/add', (req, res, next) => {
   });
 });
 
+router.post('/:id/rsvp', (req, res, next) => {
+  knex('events_users')
+  .returning('user_id')
+  .where('user_id', Number.parseInt(req.session.id))
+  .andWhere('event_id', Number.parseInt(req.params.id))
+  .then((exists) => {
+    // console.log('exists:', exists[0]);
+    if (!exists[0]) {
+      // console.log('user not registered yet');
+      knex('events_users')
+      .returning('*')
+      .insert({
+        user_id: Number.parseInt(req.session.id),
+        event_id: Number.parseInt(req.params.id)
+      })
+      .then((result) => {
+        // console.log('user registered for event');
+        res.send({
+          "code": 200,
+          "attendee": result,
+          "admin": req.session.admin,
+          "email": req.session.email,
+          "first": req.session.first,
+          "last": req.session.last,
+        })
+      }).catch((err) => {
+        console.log('error, attendee not added', err);
+        res.send({"code": 204, "message": "error adding attendee to db"});
+        // next(err);
+      });
+    } else {
+      res.send({"code": 204, "message": "attendee already registered"});
+    }
+  })
+  .catch(err => next(err))
+});
+
 module.exports = router;

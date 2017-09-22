@@ -37,7 +37,7 @@ class Public extends React.Component {
       <div>
         <PublicNavigation></PublicNavigation>
         <div>
-          <h3>Upcoming Events:</h3>
+          <h3 className="text-center">Upcoming Trips:</h3>
           <div>
             {
               Object

@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-// const session = require('express-session');
 
 var index = require('./routes/index');
 var login = require('./routes/login');
@@ -16,6 +15,7 @@ var privateEvents = require('./routes/privateEvents');
 var logout = require('./routes/logout');
 var event = require('./routes/event');
 var comments = require('./routes/comments');
+// var settings = require('./routes/settings');
 
 var app = express();
 
@@ -45,6 +45,7 @@ app.use('/privateEvents', privateEvents);
 app.use('/logout', logout);
 app.use('/event', event);
 app.use('/comments', comments);
+// app.use('/settings', settings);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

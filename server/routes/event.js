@@ -119,4 +119,66 @@ router.delete('/:id', (req, res, next) => {
   });
 });
 
+router.get('/edit/:id', (req, res, next) => {
+  if (req.session.id !== undefined) {
+    let id = Number.parseInt(req.params.id);
+    knex('events').where('id', id).returning('*').then((event) => {
+      console.log(event[0]);
+      if (req.session.id === event[0].organizer) {
+        console.log('event data has been pulled from db');
+        res.send({"code": 200, "event": event, "message": "event data has been pulled from db"})
+      } else {
+        // user id and event id don't match
+        console.log('user id and event id dont match');
+        res.status(403)
+        res.send({"code": 403, "message": "not authorized"});
+      }
+    }).catch((error) => {
+      console.log('error, event data not retrieved', error);
+      res.send({"code": 204, "message": "event data not retrieved"});
+    });
+  } else {
+    // no session.id -- not authorized
+    console.log('error, not authorized to view');
+    res.status(403)
+    res.send({"code": 403, "message": "not authorized"});
+  }
+});
+
+router.patch('/:id', (req, res, next) => {
+  let id = Number.parseInt(req.params.id);
+  // Add auth check here
+
+  if (req.session.id === req.body.organizer) {
+    knex('events').where('id', id)
+    .then((event) => {
+      if (!event) {
+        return next();
+      }
+      return knex('events').where('id', id).update({
+        activity: req.body.activity,
+        title: req.body.title,
+        description: req.body.description,
+        image_url: req.body.image_url,
+        date: req.body.date,
+        location: req.body.location
+      }).returning('*')
+      .then((event) => {
+        console.log('event data has been pulled from db');
+        res.send({"code": 200, "event": event, "message": "event data has been updated in db"})
+      })
+      .catch((err) => {
+        console.log('error, event data not updated', err);
+        res.send({"code": 204, "message": "error, event data not updated"});
+      });
+    });
+  } else {
+    //not authorized
+    console.log('error, event data not updated', err);
+    req.session = null;
+    res.send({"status": 403, "message": "not authorized to submit changes"});
+  }
+
+});
+
 module.exports = router;

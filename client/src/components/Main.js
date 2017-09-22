@@ -4,6 +4,7 @@ import Public from './Public';
 import Login from './Login';
 import Home from './Home';
 import EventPage from './EventPage';
+import EditEvent from './EditEvent';
 import AddEvent from './AddEvent';
 import EventsOrganized from './EventsOrganized';
 import EventsAttending from './EventsAttending';
@@ -35,6 +36,8 @@ class Main extends React.Component {
           <Route exact path='/home' render={ ()  => <Home {...this.state}/> }/>
           {/* <Route exact path='/home' component={Home}/> */}
           <Route exact path='/event/:id' component={EventPage}/>
+          {/* <Route exact path='/event/edit/:id' render={ ()  => <EditEvent {...this.state}/> }/> */}
+          <Route exact path='/event/edit/:id' component={EditEvent}/>
           <Route exact path='/add' component={AddEvent}/>
           <Route exact path='/organized' component={EventsOrganized}/>
           <Route exact path='/attending' component={EventsAttending}/>

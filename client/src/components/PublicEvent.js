@@ -1,13 +1,13 @@
 import React from 'react';
 
 class PublicEvent extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   events: {}
-    // }
-  }
+  // constructor(props) {
+  //   super(props);
+  //
+  //   // this.state = {
+  //   //   events: {}
+  //   // }
+  // }
 
   render() {
     const details = this.props.details;

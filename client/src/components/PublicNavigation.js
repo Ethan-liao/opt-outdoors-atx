@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class PublicNavigation extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   state: this.props
-    // }
-  }
+  // constructor(props) {
+  //   super(props);
+  //
+  //   // this.state = {
+  //   //   state: this.props
+  //   // }
+  // }
 
   render() {
     return (

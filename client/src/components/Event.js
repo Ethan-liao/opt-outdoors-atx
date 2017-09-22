@@ -2,13 +2,13 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 class Event extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   events: {}
-    // }
-  }
+  // constructor(props) {
+  //   super(props);
+  //
+  //   // this.state = {
+  //   //   events: {}
+  //   // }
+  // }
 
   render() {
     const details = this.props.details;

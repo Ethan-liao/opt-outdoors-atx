@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 
 class EventAttending extends React.Component {
   // constructor(props) {
@@ -22,7 +21,7 @@ class EventAttending extends React.Component {
             <div className="card-block">
               <h4 className="card-title">{details.title}</h4>
               <p className="card-text">{details.description}</p>
-              <Link to={`/event/${details.id}`} id={details.id}className="nav-link">Event Page</Link>
+              <Link to={`/event/${details.id}`} id={details.id} className="nav-link">Event Page</Link>
               <button className="btn btn-primary" onClick={() => this.props.removeMe(details.id)}>Remove Me</button>
             </div>
           </div>

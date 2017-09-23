@@ -32,7 +32,7 @@ class Home extends React.Component {
         let events = response.data.events;
         let obj = {};
         events.forEach((event) => {
-          obj[event.id] = event;
+          obj[event.date] = event;
         })
         this.setState({ events : obj});
         console.log(this.state.events);
@@ -58,7 +58,7 @@ class Home extends React.Component {
       <div>
         <Navigation></Navigation>
         <div>
-          <h3>Upcoming Events:</h3>
+          <h3 className="text-center mt-3">Upcoming Events:</h3>
           <div>
             {
               Object

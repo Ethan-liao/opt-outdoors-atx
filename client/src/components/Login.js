@@ -102,40 +102,46 @@ class Login extends React.Component {
       <div>
         <PublicNavigation></PublicNavigation>
         <div>
-          Sign In:
-          <form onSubmit={this.handleSignIn}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input name="email" type="text" className="form-control" id="email" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input name="password" type="password" className="form-control" id="password" onChange={this.handleInputChange}/>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </form>
+          <div></div>
+          <div></div>
         </div>
-        <div>
-          Register:
-          <form onSubmit={this.handleRegister}>
-            <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
-              <input name="firstName" type="text" className="form-control" id="firstName" onChange={this.handleInputChange}/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input name="lastName" type="text" className="form-control" id="lastName" onChange={this.handleInputChange}/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="newEmail">Email</label>
-              <input name="newEmail" type="text" className="form-control" id="newEmail" onChange={this.handleInputChange}/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="newPassword">Password</label>
-              <input name="newPassword" type="password" className="form-control" id="newPassword" onChange={this.handleInputChange}/>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </form>
+        <div className="col-sm-8 offset-sm-2 py-3">
+          <div className="py-3">
+            <h5>Sign In:</h5>
+            <form onSubmit={this.handleSignIn}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input required name="email" type="text" className="form-control" id="email" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input required name="password" type="password" className="form-control" id="password" onChange={this.handleInputChange}/>
+              </div>
+              <button type="submit" className="btn btn-primary">Sign In</button>
+            </form>
+          </div>
+          <div className="py-3">
+            <h5>Register:</h5>
+            <form onSubmit={this.handleRegister}>
+              <div className="form-group">
+                <label htmlFor="firstName">First Name</label>
+                <input required name="firstName" type="text" className="form-control" id="firstName" onChange={this.handleInputChange}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <input required name="lastName" type="text" className="form-control" id="lastName" onChange={this.handleInputChange}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="newEmail">Email</label>
+                <input required name="newEmail" type="text" className="form-control" id="newEmail" onChange={this.handleInputChange}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="newPassword">Password</label>
+                <input required name="newPassword" type="password" className="form-control" id="newPassword" onChange={this.handleInputChange}/>
+              </div>
+              <button type="submit" className="btn btn-primary">Register</button>
+            </form>
+          </div>
         </div>
       </div>
     )

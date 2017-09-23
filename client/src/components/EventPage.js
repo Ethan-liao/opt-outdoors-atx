@@ -30,6 +30,9 @@ class EventPage extends React.Component {
       if (response.data.code === 200) {
         console.log('events response:', response);
         let event = response.data.event[0];
+        console.log(eventID);
+        event['id'] = eventID;
+        console.log('event setstate:', event);
         this.setState({event: event});
       } else {
         console.log("user is not logged in");

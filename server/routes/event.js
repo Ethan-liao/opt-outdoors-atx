@@ -4,6 +4,7 @@ const knex = require('../db');
 
 router.get('/:id', function(req, res, next) {
   console.log('/events', req.session);
+  console.log('/events-body', req.body);
   if (req.session.id) {
     knex('events')
     .join('users', 'events.organizer', '=', 'users.id')
@@ -54,11 +55,14 @@ router.post('/add', (req, res, next) => {
 });
 
 router.post('/:id/rsvp', (req, res, next) => {
+  console.log(req.session.id);
+  console.log(req.params.id);
   knex('events_users')
   .returning('user_id')
   .where('user_id', Number.parseInt(req.session.id))
   .andWhere('event_id', Number.parseInt(req.params.id))
   .then((exists) => {
+    console.log('exists:', exists);
     if (!exists[0]) {
       knex('events_users')
       .returning('*')

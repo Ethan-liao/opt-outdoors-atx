@@ -3,8 +3,8 @@ const router = express.Router();
 const knex = require('../db');
 
 router.get('/', function(req, res, next) {
-  console.log('/events', req.session);
   knex('events')
+  .orderBy('date', 'asc')
   .then(events => res.send({
     "code": 200,
     "events": events

@@ -21,10 +21,18 @@ class Public extends React.Component {
     // sets the state
     axios.get('/events')
     .then((response) => {
+      console.log(response);
       let events = response.data.events;
       let obj = {};
+
+      // for (let i=0; i<events.length; i++) {
+      //   console.log(events[i]);
+      //   obj[events[i].id] = events[i];
+      //   this.setState({ events : obj});
+      // }
+
       events.forEach((event) => {
-        obj[event.id] = event;
+        obj[event.date] = event;
       })
       this.setState({ events : obj});
     }).catch(function(error) {
@@ -37,7 +45,7 @@ class Public extends React.Component {
       <div>
         <PublicNavigation></PublicNavigation>
         <div>
-          <h3 className="text-center">Upcoming Trips:</h3>
+          <h3 className="text-center mt-3">Upcoming Trips:</h3>
           <div>
             {
               Object

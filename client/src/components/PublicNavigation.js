@@ -11,9 +11,14 @@ class PublicNavigation extends React.Component {
   // }
 
   render() {
+
+    const navStyle = {
+      backgroundColor: "#763626"
+    };
+
     return (
       <div>
-          <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+          <nav className="navbar navbar-toggleable-md navbar-inverse" style={navStyle}>
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

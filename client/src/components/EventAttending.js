@@ -7,6 +7,25 @@ class EventAttending extends React.Component {
   render() {
     const details = this.props.details;
 
+    const headerStyle = {
+      backgroundColor: "#90afc5"
+    };
+
+    const buttonStyle = {
+      backgroundColor: "#336b87",
+      borderColor: "#336b87"
+    };
+
+    const buttonStyle2 = {
+      backgroundColor: "#283132",
+      borderColor: "#283132"
+    };
+
+    const buttonStyle3 = {
+      backgroundColor: "#763626",
+      borderColor: "#763626"
+    };
+
     return (
       <div className="container">
         <div className="row">
@@ -25,8 +44,8 @@ class EventAttending extends React.Component {
                   </div>
                 </div>
                 <div className="col-sm-4 px-1 py-3">
-                  <Link to={`/event/${details.id}`} id={details.id} className="btn btn-block btn-success mb-1">Go To Event Page</Link>
-                  <button className="btn btn-block btn-danger mb-1" onClick={() => this.props.removeMe(details.id)}>Remove Me From Event</button>
+                  <Link to={`/event/${details.id}`} id={details.id} className="btn btn-block btn-success mb-1" style={buttonStyle}>Go To Event Page</Link>
+                  <button className="btn btn-block btn-danger mb-1" onClick={() => this.props.removeMe(details.id)}  style={buttonStyle2}>Remove Me From Event</button>
                 </div>
               </div>
             </div>

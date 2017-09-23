@@ -57,11 +57,18 @@ class AddEvent extends React.Component {
   }
 
   render() {
+
+    const buttonStyle = {
+      backgroundColor: "#336b87",
+      borderColor: "#336b87"
+    };
+
     if (this.state.postSuccess) {
       return (<Redirect to={{
         pathname: "/home"
       }} />)
     }
+
     return (
       <div>
         <Navigation></Navigation>
@@ -111,7 +118,7 @@ class AddEvent extends React.Component {
                 <input required name="image_url" className="form-control" type="url" id="image_url" onChange={this.handleInputChange}/>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary" style={buttonStyle}>Submit</button>
           </form>
         </div>
       </div>

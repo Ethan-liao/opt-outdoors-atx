@@ -13,10 +13,14 @@ class PublicEvent extends React.Component {
   render() {
     const details = this.props.details;
 
+    const headerStyle = {
+      backgroundColor: "#90afc5"
+    };
+
     return (
         <div className="col-sm-8 offset-sm-2 py-3">
           <div className="card">
-            <h5 className=" text-center card-header">
+            <h5 className=" text-center card-header" style={headerStyle}>
               <Moment format="dddd, MMMM Do">{details.date}</Moment>
             </h5>
             <div className="row px-5">

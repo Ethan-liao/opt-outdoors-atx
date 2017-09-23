@@ -87,6 +87,17 @@ class EditSettings extends React.Component {
   }
 
   render() {
+
+    const buttonStyle = {
+      backgroundColor: "#336b87",
+      borderColor: "#336b87"
+    };
+
+    const buttonStyle2 = {
+      backgroundColor: "#283132",
+      borderColor: "#283132"
+    };
+
     if (this.state.submit) {
       return (<Redirect to={{
         pathname: "/home"
@@ -121,8 +132,8 @@ class EditSettings extends React.Component {
                 <input required value={this.state.email} name="email" className="form-control" type="text" id="location" onChange={this.handleInputChange}/>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary mr-2">Submit Changes</button>
-            <button onClick={this.handleCancel} type="button" className="btn btn-primary">Cancel</button>
+            <button type="submit" className="btn btn-primary mr-2" style={buttonStyle}>Submit Changes</button>
+            <button onClick={this.handleCancel} type="button" className="btn btn-primary" style={buttonStyle2}>Cancel</button>
           </form>
         </div>
       </div>

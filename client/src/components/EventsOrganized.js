@@ -66,7 +66,7 @@ class EventsOrganized extends React.Component {
       <div>
         <Navigation></Navigation>
         <div>
-          <h3 className="text-center">Upcoming Events You Have Organized:</h3>
+          <h3 className="text-center mt-3">Upcoming Events You Have Organized:</h3>
           <div>
             {
               Object

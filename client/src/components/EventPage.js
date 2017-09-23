@@ -133,9 +133,23 @@ class EventPage extends React.Component {
       });
     }
 
-
   render() {
     let details = this.state.event;
+
+    const buttonStyle = {
+      backgroundColor: "#336b87",
+      borderColor: "#336b87"
+    };
+
+    const buttonStyle2 = {
+      backgroundColor: "#90afc5",
+      borderColor: "#90afc5"
+    };
+
+    const buttonStyle3 = {
+      backgroundColor: "#283132",
+      borderColor: "#283132"
+    };
 
     if (this.state.redirect) {
       return (<Redirect to={{
@@ -150,11 +164,11 @@ class EventPage extends React.Component {
 
           <div className="row">
             <div className="col-sm-1"></div>
-            <div className="col-sm-10 text-center pb-3">
+            <div className="col-sm-10 text-center pb-3 mt-3">
               <img className="w-100" src={details.image_url} alt={details.name}/>
               <h3 className="py-3"><strong>{details.title}</strong></h3>
-              <button onClick={this.joinEvent} type="button" className="btn btn-primary mr-3">Join Event</button>
-              <a className="btn btn-primary" href={`mailto:${details.email}?subject=${details.title}`}>Contact the Organizer</a>
+              <button onClick={this.joinEvent} type="button" className="btn btn-primary mr-3" style={buttonStyle}>Join Event</button>
+              <a className="btn btn-primary" href={`mailto:${details.email}?subject=${details.title}`} style={buttonStyle2}>Contact the Organizer</a>
             </div>
             <div className="col-sm-1"></div>
           </div>
@@ -202,7 +216,7 @@ class EventPage extends React.Component {
             <div className="col-sm-1"></div>
             <div className="col-sm-10">
 
-              <h4 className="text-center pt-3"><strong>Message Board:</strong></h4>
+              <h4 className="text-center pt-3"><strong>Message Board</strong></h4>
               <div>
                 <form onSubmit={this.submitComment}>
                   <div className="form-group">
@@ -212,7 +226,7 @@ class EventPage extends React.Component {
                         <input required name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment" placeholder="Ask questions, post your thoughts, etc."/>
                       </div>
                       <div className="col-sm-2">
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary" style={buttonStyle3}>Submit</button>
                       </div>
                     </div>
                   </div>

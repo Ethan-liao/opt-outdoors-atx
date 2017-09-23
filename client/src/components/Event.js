@@ -7,13 +7,22 @@ class Event extends React.Component {
   render() {
     const details = this.props.details;
 
+    const headerStyle = {
+      backgroundColor: "#90afc5"
+    };
+
+    const buttonStyle = {
+      backgroundColor: "#336b87",
+      borderColor: "#336b87"
+    };
+
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-1"></div>
           <div className="col-sm-10 py-3">
             <div className="card">
-              <h5 className=" text-center card-header">
+              <h5 className=" text-center card-header" style={headerStyle}>
                 <Moment format="dddd, MMMM Do">{details.date}</Moment>
               </h5>
               <div className="row px-5">
@@ -30,7 +39,7 @@ class Event extends React.Component {
                 </div>
               </div>
               <div className="px-3 py-3">
-                <Link to={`/event/${details.id}`} id={details.id} className="btn btn-block btn-primary">Additional Info</Link>
+                <Link to={`/event/${details.id}`} id={details.id} className="btn btn-block btn-primary" style={buttonStyle}>Additional Info</Link>
               </div>
             </div>
           </div>

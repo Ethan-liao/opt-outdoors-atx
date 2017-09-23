@@ -48,9 +48,13 @@ class Navigation extends React.Component {
       }} />)
     }
 
+    const navStyle = {
+      backgroundColor: "#763626"
+    };
+
     return (
-      <div className="green">
-        <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+      <div>
+        <nav className="navbar navbar-toggleable-md navbar-inverse" style={navStyle}>
           <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -86,5 +90,7 @@ class Navigation extends React.Component {
     )
   }
 }
+
+
 
 export default Navigation;

@@ -88,6 +88,11 @@ class Login extends React.Component {
  }
 
   render() {
+    const buttonStyle = {
+      backgroundColor: "#336b87",
+      borderColor: "#336b87"
+    };
+
     if (this.state.signedIn) {
       return (<Redirect to={{
         pathname: "/home",
@@ -98,6 +103,7 @@ class Login extends React.Component {
         }
       }} />)
     }
+
     return (
       <div>
         <PublicNavigation></PublicNavigation>
@@ -117,7 +123,7 @@ class Login extends React.Component {
                 <label htmlFor="password">Password</label>
                 <input required name="password" type="password" className="form-control" id="password" onChange={this.handleInputChange}/>
               </div>
-              <button type="submit" className="btn btn-primary">Sign In</button>
+              <button type="submit" className="btn btn-primary" style={buttonStyle}>Sign In</button>
             </form>
           </div>
           <div className="py-3">
@@ -139,7 +145,7 @@ class Login extends React.Component {
                 <label htmlFor="newPassword">Password</label>
                 <input required name="newPassword" type="password" className="form-control" id="newPassword" onChange={this.handleInputChange}/>
               </div>
-              <button type="submit" className="btn btn-primary">Register</button>
+              <button type="submit" className="btn btn-primary" style={buttonStyle}>Register</button>
             </form>
           </div>
         </div>

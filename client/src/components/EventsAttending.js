@@ -66,7 +66,7 @@ class EventsAttending extends React.Component {
       <div>
         <Navigation></Navigation>
         <div>
-          <h3>Upcoming Events You Are Attending:</h3>
+          <h3 className="text-center">Upcoming Events You Are Attending:</h3>
           <div>
             {
               Object

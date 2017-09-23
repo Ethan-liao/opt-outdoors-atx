@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import Moment from 'react-moment';
 
 import Navigation from './Navigation';
 import Comments from './Comments';
@@ -145,41 +146,88 @@ class EventPage extends React.Component {
     return (
       <div>
         <Navigation></Navigation>
-        <div className="col-sm-10 offset-sm-1 py-3">
-          <img src={details.image_url} alt={details.name}/>
-          <p><strong>Title</strong></p>
-          <p>{details.title}</p>
-          <p><strong>Date</strong></p>
-          <p>{details.date}</p>
-          <p><strong>Description</strong></p>
-          <p>{details.description}</p>
-          <p><strong>Location</strong></p>
-          <p>{details.location}</p>
-          <p><strong>Organizer</strong></p>
-          <p>{details.first} {details.last} ({details.email})</p>
-          <p><strong>Attendees ({Object.keys(this.state.attendees).length})</strong></p>
-          <ul>
-            {Object.keys(this.state.attendees).map(key => <li key={key}>{this.state.attendees[key].first} {this.state.attendees[key].last}</li>)}
-          </ul>
-          <div>
-            <p><strong>Comments:</strong></p>
-            <div>
-              {Object.keys(this.state.comments).map(key => <Comments key={key} details={this.state.comments[key]}/>)
-            }
+        <div className="container">
+
+          <div className="row">
+            <div className="col-sm-1"></div>
+            <div className="col-sm-10 text-center pb-3">
+              <img className="w-100" src={details.image_url} alt={details.name}/>
+              <h3 className="py-3"><strong>{details.title}</strong></h3>
+              <button onClick={this.joinEvent} type="button" className="btn btn-primary mr-3">Join Event</button>
+              <a className="btn btn-primary" href={`mailto:${details.email}?subject=${details.title}`}>Contact the Organizer</a>
+            </div>
+            <div className="col-sm-1"></div>
           </div>
-          <div>
-            <form onSubmit={this.submitComment}>
-              <div className="form-group">
-                <label htmlFor="newComment">Leave a comment:</label>
-                <input required name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment"/>
+
+          <div className="row">
+            <div className="col-sm-1"></div>
+            <div className="col-sm-10">
+              <div className="row">
+                <div className="col-sm-8 py-3 form-control">
+                  <h5><strong>Additional Information</strong></h5>
+                  <div className="row">
+                    <p className="col-sm-3">Organizer:</p>
+                    <p className="col-sm-9">{details.first} {details.last}</p>
+                  </div>
+
+                  <div className="row">
+                    <p className="col-sm-3">Date:</p>
+                    <p className="col-sm-9"><Moment format="dddd, MMMM Do">{details.date}</Moment></p>
+                  </div>
+
+                  <div className="row">
+                    <p className="col-sm-3">Location:</p>
+                    <p className="col-sm-9">{details.location}</p>
+                  </div>
+
+                  <div className="row">
+                    <p className="col-sm-3">Details:</p>
+                    <p className="col-sm-9">{details.description}</p>
+                  </div>
+
+                </div>
+                {/* <div className="col-sm-1 py-3"></div> */}
+                <div className="col-sm-4 py-3 form-control">
+                  <h5><strong>Attendees ({Object.keys(this.state.attendees).length})</strong></h5>
+                  <div>
+                    {Object.keys(this.state.attendees).map(key => <p key={key}>{this.state.attendees[key].first} {this.state.attendees[key].last}</p>)}
+                  </div>
+                </div>
               </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            </div>
+            <div className="col-sm-1"></div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-1"></div>
+            <div className="col-sm-10">
+
+              <h4 className="text-center pt-3"><strong>Message Board:</strong></h4>
+              <div>
+                <form onSubmit={this.submitComment}>
+                  <div className="form-group">
+                    {/* <label htmlFor="newComment">Leave a message:</label> */}
+                    <div className="row">
+                      <div className="col-sm-10">
+                        <input required name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment" placeholder="Ask questions, post your thoughts, etc."/>
+                      </div>
+                      <div className="col-sm-2">
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div className="form-control">
+                {Object.keys(this.state.comments).map(key => <Comments key={key} details={this.state.comments[key]}/>)}
+              </div>
+
+            </div>
+            <div className="col-sm-1"></div>
+
           </div>
         </div>
-        <button onClick={this.joinEvent} type="button" className="btn btn-primary">Join Event</button>
-        </div>
-    </div>
+      </div>
     )
   }
 }

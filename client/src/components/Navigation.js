@@ -49,7 +49,7 @@ class Navigation extends React.Component {
     }
 
     return (
-      <div>
+      <div className="green">
         <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
           <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>

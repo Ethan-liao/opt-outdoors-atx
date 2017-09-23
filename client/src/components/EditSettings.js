@@ -25,7 +25,6 @@ class EditSettings extends React.Component {
   componentWillMount() {
     axios.get('/user').then(response => {
       if (response.data.code === 200) {
-        console.log('user response:', response);
         let user = response.data.user[0];
         this.setState({
           user: user,
@@ -101,8 +100,8 @@ class EditSettings extends React.Component {
     return (
       <div>
         <Navigation></Navigation>
-        <div>
-          Account Details:
+        <div className="col-sm-8 offset-sm-2 py-3">
+          <h5>Account Details:</h5>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
               <label htmlFor="first" className="col-2 col-form-label">First Name</label>

@@ -65,8 +65,8 @@ class AddEvent extends React.Component {
     return (
       <div>
         <Navigation></Navigation>
-        <div>
-          Add Event Details:
+        <div className="col-sm-8 offset-sm-2 py-3" >
+          <h5>New Event Details (Required):</h5>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
               <label htmlFor="activity" className="col-2 col-form-label">Activity</label>

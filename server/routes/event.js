@@ -3,11 +3,9 @@ const router = express.Router();
 const knex = require('../db');
 
 router.get('/:id', function(req, res, next) {
-  console.log('/events', req.session);
-  console.log('/events-body', req.body);
   if (req.session.id) {
     knex('events')
-    .join('users', 'events.organizer', '=', 'users.id')
+    .join('users', 'events.organizer', 'users.id')
     .returning('*')
     .where('events.id', req.params.id)
     .then(event => res.send({"code": 200, "event": event}))

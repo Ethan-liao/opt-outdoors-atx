@@ -30,9 +30,7 @@ class EventPage extends React.Component {
       if (response.data.code === 200) {
         console.log('events response:', response);
         let event = response.data.event[0];
-        console.log(eventID);
         event['id'] = eventID;
-        console.log('event setstate:', event);
         this.setState({event: event});
       } else {
         console.log("user is not logged in");
@@ -44,7 +42,6 @@ class EventPage extends React.Component {
 
     axios.get(`${url}/attendees`).then(response => {
       if (response.data.code === 200) {
-        console.log('attendees response:', response);
         let attendees = response.data.attendees;
         let obj = {};
         attendees.forEach((attendee) => {
@@ -60,7 +57,6 @@ class EventPage extends React.Component {
     });
 
     axios.get(`/comments/${eventID}`).then(response => {
-      console.log('comments response:', response.data.comments);
       let comments = response.data.comments;
       let obj = {};
       comments.forEach((comment) => {
@@ -86,18 +82,16 @@ class EventPage extends React.Component {
     };
     axios.post(`/comments/${this.state.event.id}`, payload)
     .then(response => {
-    // console.log('response from db:', response);
     if (response.data.code === 200) {
       // replicate the result of a comments-users join query
-      let test = response.data.comment[0];
-      test["admin"] = response.data.admin;
-      test["email"] = response.data.email;
-      test["first"] = response.data.first;
-      test["last"] = response.data.last;
+      let newComment = response.data.comment[0];
+      newComment["admin"] = response.data.admin;
+      newComment["email"] = response.data.email;
+      newComment["first"] = response.data.first;
+      newComment["last"] = response.data.last;
       // create copy of state, add new comment, update state
       const comments = {...this.state.comments};
-      comments[response.data.comment[0].comment_id] = test;
-      // comments[response.data.comment[0].comment_id] = response.data.comment[0];
+      comments[response.data.comment[0].comment_id] = newComment;
       this.setState({
         comments,
         newComment: ''
@@ -151,26 +145,27 @@ class EventPage extends React.Component {
     return (
       <div>
         <Navigation></Navigation>
-        <img src={details.image_url} alt={details.name}/>
-        <p><strong>Title</strong></p>
-        <p>{details.title}</p>
-        <p><strong>Date</strong></p>
-        <p>{details.date}</p>
-        <p><strong>Description</strong></p>
-        <p>{details.description}</p>
-        <p><strong>Location</strong></p>
-        <p>{details.location}</p>
-        <p><strong>Organizer</strong></p>
-        <p>{details.first} {details.last} ({details.email})</p>
-        <p><strong>Attendees ({Object.keys(this.state.attendees).length})</strong></p>
-        <ul>
-          {Object.keys(this.state.attendees).map(key => <li key={key}>{this.state.attendees[key].first} {this.state.attendees[key].last}</li>)}
-        </ul>
-        <div>
-          <p><strong>Comments:</strong></p>
+        <div className="col-sm-10 offset-sm-1 py-3">
+          <img src={details.image_url} alt={details.name}/>
+          <p><strong>Title</strong></p>
+          <p>{details.title}</p>
+          <p><strong>Date</strong></p>
+          <p>{details.date}</p>
+          <p><strong>Description</strong></p>
+          <p>{details.description}</p>
+          <p><strong>Location</strong></p>
+          <p>{details.location}</p>
+          <p><strong>Organizer</strong></p>
+          <p>{details.first} {details.last} ({details.email})</p>
+          <p><strong>Attendees ({Object.keys(this.state.attendees).length})</strong></p>
+          <ul>
+            {Object.keys(this.state.attendees).map(key => <li key={key}>{this.state.attendees[key].first} {this.state.attendees[key].last}</li>)}
+          </ul>
           <div>
-            {Object.keys(this.state.comments).map(key => <Comments key={key} details={this.state.comments[key]}/>)
-}
+            <p><strong>Comments:</strong></p>
+            <div>
+              {Object.keys(this.state.comments).map(key => <Comments key={key} details={this.state.comments[key]}/>)
+            }
           </div>
           <div>
             <form onSubmit={this.submitComment}>
@@ -183,7 +178,8 @@ class EventPage extends React.Component {
           </div>
         </div>
         <button onClick={this.joinEvent} type="button" className="btn btn-primary">Join Event</button>
-      </div>
+        </div>
+    </div>
     )
   }
 }

@@ -3,9 +3,6 @@ import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
 
 class EventOrganized extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   render() {
     const details = this.props.details;
@@ -36,8 +33,9 @@ class EventOrganized extends React.Component {
               <div className="row px-5">
                 <div className="col-sm-8 px-3">
                   <div className="card-block px-3">
-                    <h5 className="card-title">{details.title}</h5>
-                    <p className="card-text">{details.location}</p>
+                    <h4 className="card-title pb-2">{details.title}</h4>
+                    <h5 className="card-text pb-2">{details.location}</h5>
+                    <h6 className="card-text pb-2">Primary Activity: {details.activity}</h6>
                     <p className="card-text"><i>Posted <Moment fromNow>{details.created_at}</Moment></i></p>
                   </div>
                 </div>

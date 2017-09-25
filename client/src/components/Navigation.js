@@ -62,7 +62,7 @@ class Navigation extends React.Component {
           {/* <a onClick={this.goHome} className="navbar-brand" href="">Opt Outdoors ATX</a> */}
           <Link to="/home" className="navbar-brand">Opt Outdoors ATX</Link>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to="/add" className="nav-link">Add Event</Link>
               </li>

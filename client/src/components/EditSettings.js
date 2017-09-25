@@ -117,19 +117,19 @@ class EditSettings extends React.Component {
             <div className="form-group row">
               <label htmlFor="first" className="col-2 col-form-label">First Name</label>
               <div className="col-10">
-                <input required value={this.state.first} name="first" className="form-control" type="text" id="title" onChange={this.handleInputChange}/>
+                <input required value={this.state.first} name="first" className="form-control" type="text" id="first" onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="form-group row">
               <label htmlFor="last" className="col-2 col-form-label">Last Name</label>
               <div className="col-10">
-                <input required value={this.state.last} name="last" className="form-control" type="text" id="title" onChange={this.handleInputChange}/>
+                <input required value={this.state.last} name="last" className="form-control" type="text" id="last" onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="form-group row">
               <label htmlFor="email" className="col-2 col-form-label">Email</label>
               <div className="col-10">
-                <input required value={this.state.email} name="email" className="form-control" type="text" id="location" onChange={this.handleInputChange}/>
+                <input required value={this.state.email} name="email" className="form-control" type="email" id="email" onChange={this.handleInputChange}/>
               </div>
             </div>
             <button type="submit" className="btn btn-primary mr-2" style={buttonStyle}>Submit Changes</button>

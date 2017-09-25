@@ -25,7 +25,6 @@ class Login extends React.Component {
 
   handleRegister(event) {
     event.preventDefault();
-    //To be done === check for empty values before hitting submit
 
     var payload = {
       "first": this.state.firstName,
@@ -39,10 +38,19 @@ class Login extends React.Component {
       console.log('response from db:', response);
       if (response.status === 200) {
         console.log("registration successful");
+        alert("Registration successful. Please log in.");
       }
     }).catch(function(error) {
       console.log(error);
+      alert("Registration unsuccessful. Please try again.");
     });
+
+    this.setState({
+      firstName: '',
+      lastName: '',
+      newEmail: '',
+      newPassword: ''
+    })
   }
 
   handleSignIn(event) {
@@ -117,7 +125,7 @@ class Login extends React.Component {
             <form onSubmit={this.handleSignIn}>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input required name="email" type="text" className="form-control" id="email" placeholder="test@gmail.com" onChange={this.handleInputChange}/>
+                <input required name="email" type="text" className="form-control" id="email" onChange={this.handleInputChange}/>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -131,19 +139,19 @@ class Login extends React.Component {
             <form onSubmit={this.handleRegister}>
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
-                <input required name="firstName" type="text" className="form-control" id="firstName" onChange={this.handleInputChange}/>
+                <input required value={this.state.firstName} ref="firstName" name="firstName" type="text" className="form-control" id="firstName" onChange={this.handleInputChange}/>
               </div>
               <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
-                <input required name="lastName" type="text" className="form-control" id="lastName" onChange={this.handleInputChange}/>
+                <input required value={this.state.lastName} name="lastName" type="text" className="form-control" id="lastName" onChange={this.handleInputChange}/>
               </div>
               <div className="form-group">
                 <label htmlFor="newEmail">Email</label>
-                <input required name="newEmail" type="text" className="form-control" id="newEmail" onChange={this.handleInputChange}/>
+                <input required value={this.state.newEmail} name="newEmail" type="email" className="form-control" id="newEmail" onChange={this.handleInputChange}/>
               </div>
               <div className="form-group">
                 <label htmlFor="newPassword">Password</label>
-                <input required name="newPassword" type="password" className="form-control" id="newPassword" onChange={this.handleInputChange}/>
+                <input required value={this.state.newPassword} name="newPassword" type="password" className="form-control" id="newPassword" onChange={this.handleInputChange}/>
               </div>
               <button type="submit" className="btn btn-primary" style={buttonStyle}>Register</button>
             </form>

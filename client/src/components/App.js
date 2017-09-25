@@ -1,5 +1,6 @@
 import React from 'react';
 import Main from './Main';
+import Footer from './Footer';
 
 class App extends React.Component {
 
@@ -7,6 +8,7 @@ class App extends React.Component {
     return (
       <div>
         <Main/>
+        <Footer></Footer>
       </div>
     )
   }

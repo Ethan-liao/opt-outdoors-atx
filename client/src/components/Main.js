@@ -29,7 +29,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <main id="green">
+      <main>
         <Switch>
           {/* <Route exact path='/' component={Public}/> */}
           <Route exact path='/' render={ ()  => <Public {...this.state}/> }/>

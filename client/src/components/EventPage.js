@@ -161,7 +161,6 @@ class EventPage extends React.Component {
       <div>
         <Navigation></Navigation>
         <div className="container">
-
           <div className="row">
             <div className="col-sm-1"></div>
             <div className="col-sm-10 text-center pb-3 mt-3">

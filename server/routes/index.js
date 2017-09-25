@@ -47,7 +47,19 @@ router.patch('/user', (req, res, next) => {
     req.session = null;
     res.send({"status": 403, "message": "not authorized to submit changes"});
   }
+});
 
+router.get('/check', function(req, res, next) {
+  if (req.session.id) {
+    knex('users')
+    .where('users.id', req.session.id)
+    .returning('users.id')
+    .then(user => res.send({"code": 200, "user": "User has session.id"}))
+    .catch(err => next(err))
+  } else {
+    console.log('no session id');
+    res.send({"code": 403, "success": "No session id exists."});
+  }
 });
 
 module.exports = router;

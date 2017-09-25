@@ -21,25 +21,21 @@ class EventAttending extends React.Component {
       borderColor: "#283132"
     };
 
-    const buttonStyle3 = {
-      backgroundColor: "#763626",
-      borderColor: "#763626"
-    };
-
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-1"></div>
           <div className="col-sm-10 py-3">
             <div className="card">
-              <h5 className=" text-center card-header">
+              <h5 className=" text-center card-header" style={headerStyle}>
                 <Moment format="dddd, MMMM Do">{details.date}</Moment>
               </h5>
               <div className="row px-5">
                 <div className="col-sm-8 px-3">
                   <div className="card-block px-3">
-                    <h5 className="card-title">{details.title}</h5>
-                    <p className="card-text">{details.location}</p>
+                    <h4 className="card-title pb-2">{details.title}</h4>
+                    <h5 className="card-text pb-2">{details.location}</h5>
+                    <h6 className="card-text pb-2">Primary Activity: {details.activity}</h6>
                     <p className="card-text">{details.description}</p>
                   </div>
                 </div>

@@ -16,11 +16,31 @@ class AddEvent extends React.Component {
       "image_url": '',
       "date": '',
       "location": '',
-      "postSuccess": false
+      "postSuccess": false,
+      "redirect": false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentWillMount() {
+    axios.get('/check').then(response => {
+      console.log('initial', response);
+      if (response.data.code === 200) {
+        console.log("User has access to this page");
+        this.setState({ redirect: false});
+      } else if (response.data.code === 403) {
+        console.log("User does not have access to this page");
+        this.setState({ redirect : true})
+      } else {
+        console.log("Unknown error code received");
+        this.setState({ redirect : true})
+      }
+    }).catch(function(error) {
+      console.log('here');
+      console.log(error);
+    });
   }
 
   handleSubmit(e) {
@@ -69,59 +89,74 @@ class AddEvent extends React.Component {
       }} />)
     }
 
+    if (this.state.redirect) {
+      return (<Redirect to={{
+        pathname: "/"
+      }} />)
+    }
+
     return (
       <div>
         <Navigation></Navigation>
-        <div className="col-sm-8 offset-sm-2 py-3" >
-          <h5>New Event Details (Required):</h5>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group row">
-              <label htmlFor="activity" className="col-2 col-form-label">Activity</label>
-              <div className="col-10">
-                <select required name="activity" className="form-control" id="activity" onChange={this.handleInputChange}>
-                  <option selected>Hiking</option>
-                  <option>Trail Running</option>
-                  <option>Mountain Biking</option>
-                  <option>Road Biking</option>
-                  <option>Climbing</option>
-                  <option>Other</option>
-                </select>
+
+        <div className="container">
+          <div className="row pb-3">
+            <div className="col-sm-1"></div>
+            <div className="col-sm-10">
+                <h3 className="text-center mt-3 mb-3">New Trip Details (Required):</h3>
+                <div>
+                  <form onSubmit={this.handleSubmit}>
+                    <div className="form-group row">
+                      <label htmlFor="activity" className="col-2 col-form-label">Activity</label>
+                      <div className="col-10">
+                        <select required name="activity" className="form-control" id="activity" onChange={this.handleInputChange}>
+                          <option>Hiking</option>
+                          <option>Trail Running</option>
+                          <option>Mountain Biking</option>
+                          <option>Road Biking</option>
+                          <option>Climbing</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="title" className="col-2 col-form-label">Title</label>
+                      <div className="col-10">
+                        <input required name="title" className="form-control" type="text" id="title" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="description" className="col-2 col-form-label">Description</label>
+                      <div className="col-10">
+                        <textarea required name="description" className="form-control" id="description" rows="3" onChange={this.handleInputChange}></textarea>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="location" className="col-2 col-form-label">Location</label>
+                      <div className="col-10">
+                        <input required name="location" className="form-control" type="text" id="location" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="date" className="col-2 col-form-label">Date</label>
+                      <div className="col-10">
+                        <input required name="date" className="form-control" type="date" id="date" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="image_url" className="col-2 col-form-label">Image URL</label>
+                      <div className="col-10">
+                        <input required name="image_url" className="form-control" type="url" id="image_url" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <button type="submit" className="btn btn-primary" style={buttonStyle}>Submit</button>
+                  </form>
+                </div>
               </div>
+              <div className="col-sm-1"></div>
             </div>
-            <div className="form-group row">
-              <label htmlFor="title" className="col-2 col-form-label">Title</label>
-              <div className="col-10">
-                <input required name="title" className="form-control" type="text" id="title" onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="description" className="col-2 col-form-label">Description</label>
-              <div className="col-10">
-                <textarea required name="description" className="form-control" id="description" rows="3" onChange={this.handleInputChange}></textarea>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="location" className="col-2 col-form-label">Location</label>
-              <div className="col-10">
-                <input required name="location" className="form-control" type="text" id="location" onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="date" className="col-2 col-form-label">Date</label>
-              <div className="col-10">
-                <input required name="date" className="form-control" type="date" id="date" onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="image_url" className="col-2 col-form-label">Image URL</label>
-              <div className="col-10">
-                <input required name="image_url" className="form-control" type="url" id="image_url" onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <button type="submit" className="btn btn-primary" style={buttonStyle}>Submit</button>
-          </form>
+          </div>
         </div>
-      </div>
     )
   }
 }

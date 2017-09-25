@@ -1,6 +1,6 @@
 module.exports = [
   {
-    activity: 'hiking',
+    activity: 'Hiking',
     title: 'Mt. Bonnell Hike!',
     description: 'Quick hike up Mt. Bonnell',
     organizer: 1,
@@ -8,7 +8,7 @@ module.exports = [
     date: '11/30/17',
     location: 'Mt Bonnell, Austin, TX 78731'
   }, {
-    activity: 'hiking',
+    activity: 'Hiking',
     title: 'Barton Creek Greenbelt Hike',
     description: 'Hike through the greenbelt.',
     organizer: 2,
@@ -16,7 +16,7 @@ module.exports = [
     date: '11/29/17',
     location: '3755 S Capital of Texas Hwy, Austin, TX 78704'
   }, {
-    activity: 'hiking',
+    activity: 'Hiking',
     title: 'McKinney Falls Day Trip',
     description: 'Hike to check out "Old Baldy", the famous 500+ year-old cypress tree!',
     organizer: 3,

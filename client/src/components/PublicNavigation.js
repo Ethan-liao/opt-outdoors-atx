@@ -2,13 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class PublicNavigation extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  //   // this.state = {
-  //   //   state: this.props
-  //   // }
-  // }
 
   render() {
 
@@ -24,7 +17,7 @@ class PublicNavigation extends React.Component {
             </button>
             <Link to="/" className="navbar-brand">Opt Outdoors ATX</Link>
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul className="navbar-nav">
+              <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to="/login" className="nav-link">Sign In</Link>
                 </li>

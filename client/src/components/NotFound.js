@@ -1,9 +1,13 @@
 import React from 'react';
+import PublicNavigation from './PublicNavigation';
 
 class NotFound extends React.Component {
   render() {
     return (
-      <h2>Page Not Found</h2>
+      <div>
+        <PublicNavigation></PublicNavigation>
+        <h4 className="text-center py-3">Page Not Found</h4>
+      </div>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Event from './Event';
 import Navigation from './Navigation';
@@ -9,22 +9,13 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = props.location.state;
-    // this.state[redirect] = false
     this.state = {
-      events: {}
+      events: {},
+      redirect: false
     }
-
   }
 
   componentWillMount() {
-    // set events state to equal all the events
-    // loop through the state object and return each event
-    //
-    // make api call to get all the events from db
-    // returns an array of events
-    // sets the state
-
     axios.get('/privateEvents')
     .then(response => {
       if (response.data.code === 200) {
@@ -49,16 +40,16 @@ class Home extends React.Component {
   }
 
   render() {
-    // if (this.state.redirect) {
-    //   return (<Redirect to={{
-    //     pathname: "/"
-    //   }} />)
-    // }
+    if (this.state.redirect) {
+      return (<Redirect to={{
+        pathname: "/"
+      }} />)
+    }
     return (
       <div>
         <Navigation></Navigation>
         <div>
-          <h3 className="text-center mt-3">Upcoming Events:</h3>
+          <h3 className="text-center mt-3">Upcoming Trips:</h3>
           <div>
             {
               Object

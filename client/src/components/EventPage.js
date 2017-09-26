@@ -29,7 +29,6 @@ class EventPage extends React.Component {
 
     axios.get(url).then(response => {
       if (response.data.code === 200) {
-        console.log('events response:', response);
         let event = response.data.event[0];
         event['id'] = eventID;
         this.setState({event: event});
@@ -194,6 +193,11 @@ class EventPage extends React.Component {
                   </div>
 
                   <div className="row">
+                    <p className="col-sm-3">Primary Activity:</p>
+                    <p className="col-sm-9">{details.activity}</p>
+                  </div>
+
+                  <div className="row">
                     <p className="col-sm-3">Details:</p>
                     <p className="col-sm-9">{details.description}</p>
                   </div>
@@ -231,7 +235,7 @@ class EventPage extends React.Component {
                   </div>
                 </form>
               </div>
-              <div className="form-control">
+              <div className="form-control mb-3">
                 {Object.keys(this.state.comments).map(key => <Comments key={key} details={this.state.comments[key]}/>)}
               </div>
 

@@ -19,7 +19,7 @@ class Public extends React.Component {
       let events = response.data.events;
       let obj = {};
       events.forEach((event) => {
-        obj[event.date] = event;
+        obj[`${event.id}-${event.created_at}`] = event;
       })
       this.setState({ events : obj});
     }).catch(function(error) {

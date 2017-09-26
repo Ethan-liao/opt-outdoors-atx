@@ -9,7 +9,7 @@ class AddEvent extends React.Component {
     super(props);
 
     this.state = {
-      "activity": 'hiking',
+      "activity": 'Hiking',
       "title": '',
       "description": '',
       "organizer": '',

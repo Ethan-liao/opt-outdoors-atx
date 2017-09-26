@@ -2,10 +2,6 @@ import React from 'react';
 import Moment from 'react-moment';
 
 class Comments extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  // }
 
   render() {
 
@@ -18,7 +14,7 @@ class Comments extends React.Component {
 
         <div className="card">
           <div className="card-header" style={headerStyle}>
-            Posted by: {this.props.details.first} {this.props.details.last} <i>(<Moment fromNow>{this.props.details.created_at}</Moment>)</i>
+            Posted by: {this.props.details.first} {this.props.details.last} <i>(<Moment fromNow>{this.props.details.comment_created_at}</Moment>)</i>
           </div>
           <div className="card-block">
             <p className="card-text">{this.props.details.content}</p>

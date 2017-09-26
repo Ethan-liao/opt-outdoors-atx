@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.text("content")
     table.integer("event_id").index().references("id").inTable("events").onDelete("cascade").notNull()
     table.integer("user_id").index().references("id").inTable("users").onDelete("cascade").notNull()
-    table.dateTime("created_at").notNullable().defaultTo(knex.fn.now())
+    table.dateTime("comment_created_at").notNullable().defaultTo(knex.fn.now())
   })
 }
 

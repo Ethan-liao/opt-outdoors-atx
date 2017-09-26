@@ -20,10 +20,11 @@ class Home extends React.Component {
     .then(response => {
       if (response.data.code === 200) {
         console.log("User has access to this page");
+        console.log('test:', response);
         let events = response.data.events;
         let obj = {};
         events.forEach((event) => {
-          obj[event.date] = event;
+          obj[`${event.id}-${event.created_at}`] = event;
         })
         this.setState({ events : obj});
         console.log(this.state.events);

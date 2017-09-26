@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ishamd/opt-outdoors-atx/issues"
   },
-  "homepage": "https://github.com/ishamd/opt-outdoors-atx#readme"
+  "homepage": "https://github.com/ishamd/opt-outdoors-atx#readme",
+  "dependencies": {
+    "express": "^4.15.5"
+  }
 }

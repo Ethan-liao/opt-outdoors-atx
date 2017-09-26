@@ -42,7 +42,6 @@ class Public extends React.Component {
             }
           </div>
         </div>
-        {/* <Footer></Footer> */}
       </div>
     )
   }

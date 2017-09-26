@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db');
-// const bcrypt = require('bcrypt');
 const bcrypt = require('bcrypt-as-promised');
 
 router.get('/', function(req, res, next) {
@@ -25,7 +24,6 @@ router.post('/', (req, res, next) => {
         req.session.last = exists.last;
         req.session.email = exists.email;
         req.session.admin = exists.admin;
-        console.log('login success. session set:',req.session);
         res.send({
           "code": 200,
           "success": "login successful",

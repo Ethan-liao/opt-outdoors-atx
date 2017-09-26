@@ -33,7 +33,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join('../react-ui/', 'build')));
+// app.use(express.static(path.join('../react-ui/', 'build')));
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+});
+
+// app.get('*', function (req, res) {
+//   res.sendFile(path.join('../react-ui/', 'build', 'index.html'));
+// });
 
 app.use(cookieSession({
   name: 'session',
@@ -50,9 +59,9 @@ app.use('/logout', logout);
 app.use('/event', event);
 app.use('/comments', comments);
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join('../react-ui/', 'build', 'index.html'));
-});
+// app.get('/*', function (req, res) {
+//   res.sendFile(path.join('../react-ui/', 'build', 'index.html'));
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

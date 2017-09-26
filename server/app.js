@@ -31,9 +31,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join('../react-ui/', 'build')));
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join('../react-ui/', 'build', 'index.html'));
-});
+
 
 app.use(cookieSession({
   name: 'session',
@@ -49,6 +47,10 @@ app.use('/privateEvents', privateEvents);
 app.use('/logout', logout);
 app.use('/event', event);
 app.use('/comments', comments);
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join('../react-ui/', 'build', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

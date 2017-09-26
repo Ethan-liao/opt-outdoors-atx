@@ -33,6 +33,7 @@ class Public extends React.Component {
         <PublicNavigation></PublicNavigation>
         <div>
           <h3 className="text-center mt-3">Upcoming Trips:</h3>
+          <h6 className="text-center mt-3">(Sign In to View)</h6>
           <div>
             {
               Object

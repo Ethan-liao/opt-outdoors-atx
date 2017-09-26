@@ -111,31 +111,39 @@ class EditSettings extends React.Component {
     return (
       <div>
         <Navigation></Navigation>
-        <div className="col-sm-8 offset-sm-2 py-3">
-          <h5>Account Details:</h5>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group row">
-              <label htmlFor="first" className="col-2 col-form-label">First Name</label>
-              <div className="col-10">
-                <input required value={this.state.first} name="first" className="form-control" type="text" id="first" onChange={this.handleInputChange}/>
+        <div className="container">
+          <div className="row pb-3">
+            <div className="col-sm-1"></div>
+            <div className="col-sm-10">
+                <h3 className="text-center mt-3 mb-3">Account Details:</h3>
+                <div>
+                  <form onSubmit={this.handleSubmit}>
+                    <div className="form-group row">
+                      <label htmlFor="first" className="col-2 col-form-label">First Name</label>
+                      <div className="col-10">
+                        <input required value={this.state.first} name="first" className="form-control" type="text" id="first" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="last" className="col-2 col-form-label">Last Name</label>
+                      <div className="col-10">
+                        <input required value={this.state.last} name="last" className="form-control" type="text" id="last" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label htmlFor="email" className="col-2 col-form-label">Email</label>
+                      <div className="col-10">
+                        <input required value={this.state.email} name="email" className="form-control" type="email" id="email" onChange={this.handleInputChange}/>
+                      </div>
+                    </div>
+                    <button type="submit" className="btn btn-primary mr-2" style={buttonStyle}>Submit Changes</button>
+                    <button onClick={this.handleCancel} type="button" className="btn btn-primary" style={buttonStyle2}>Cancel</button>
+                  </form>
+                </div>
               </div>
+              <div className="col-sm-1"></div>
             </div>
-            <div className="form-group row">
-              <label htmlFor="last" className="col-2 col-form-label">Last Name</label>
-              <div className="col-10">
-                <input required value={this.state.last} name="last" className="form-control" type="text" id="last" onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="email" className="col-2 col-form-label">Email</label>
-              <div className="col-10">
-                <input required value={this.state.email} name="email" className="form-control" type="email" id="email" onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <button type="submit" className="btn btn-primary mr-2" style={buttonStyle}>Submit Changes</button>
-            <button onClick={this.handleCancel} type="button" className="btn btn-primary" style={buttonStyle2}>Cancel</button>
-          </form>
-        </div>
+          </div>
       </div>
     )
   }

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ishamd/opt-outdoors-atx#readme",
   "dependencies": {
     "express": "^4.15.5",
+    "morgan": "^1.8.2",
     "serve-favicon": "^2.4.5"
   }
 }

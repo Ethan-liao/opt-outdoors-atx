@@ -26,14 +26,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
-// app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join('../react-ui/', 'build')));
 
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+app.get('/*', function (req, res) {
+  res.sendFile(path.join('../react-ui/', 'build', 'index.html'));
+});
 
 app.use(cookieSession({
   name: 'session',

@@ -4,7 +4,8 @@ module.exports = {
     client: 'pg',
     connection: {
       database: process.env.DATABASE_URL || 'opt_out_atx'
-    },
+    }
+  },
   //
   // test: {
   //   client: 'pg',
@@ -17,6 +18,4 @@ module.exports = {
     client: 'pg',
     connection: `${process.env.DATABASE_URL}?ssl=true`
   }
-}
-
 };

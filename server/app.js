@@ -21,6 +21,7 @@ var event = require('./routes/event');
 var comments = require('./routes/comments');
 
 var app = express();
+const PORT = process.env.PORT || 5000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -71,5 +72,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+app.listen(PORT, function () {
+  console.log(`Listening on port ${PORT}`);
+});
+
 
 module.exports = app;

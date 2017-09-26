@@ -1,4 +1,8 @@
-require('dotenv').config();
+
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv').config();
+}
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -28,10 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use(express.static(path.join('../react-ui/', 'build')));
-
-
 
 app.use(cookieSession({
   name: 'session',

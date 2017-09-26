@@ -1,5 +1,4 @@
 const express = require('express');
-// const bcrypt = require('bcrypt');
 const bcrypt = require('bcrypt-as-promised');
 const router = express.Router();
 const knex = require('../db')

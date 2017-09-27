@@ -26,7 +26,6 @@ class AddEvent extends React.Component {
 
   componentWillMount() {
     axios.get('/check').then(response => {
-      console.log('initial', response);
       if (response.data.code === 200) {
         // User has access to this page
         this.setState({ redirect: false});

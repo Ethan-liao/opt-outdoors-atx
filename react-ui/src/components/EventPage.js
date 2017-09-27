@@ -120,12 +120,11 @@ class EventPage extends React.Component {
         // create copy of state, add new comment, update state
         const attendees = {...this.state.attendees};
         attendees[response.data.attendee[0].user_id] = newAttendee;
-        // comments[response.data.comment[0].comment_id] = response.data.comment[0];
         this.setState({ attendees });
          // clear the comment form
          this.refs.newComment.value = ''
       } else if (response.data.code === 204) {
-        console.log('Error occured joining event');
+        console.log('User already registered for trip');
       }})
       .catch(function(error) {
         console.log(error);

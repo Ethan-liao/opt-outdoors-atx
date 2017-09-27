@@ -19,10 +19,10 @@ class Navigation extends React.Component {
     axios.get('/logout')
     .then(response => {
       if (response.data.code === 200) {
-        console.log("User has logged out");
+        // User has logged out successfully
         this.setState({ redirect : true})
       } else {
-        console.log("Unknown error code received");
+        console.log("Unknown error code received. Redirect to public");
         this.setState({ redirect : true})
       }
     }).catch(function(error) {
@@ -58,8 +58,6 @@ class Navigation extends React.Component {
           <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          {/* <a className="navbar-brand" href="">Opt Outdoors ATX</a> */}
-          {/* <a onClick={this.goHome} className="navbar-brand" href="">Opt Outdoors ATX</a> */}
           <Link to="/home" className="navbar-brand">Opt Outdoors ATX</Link>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ml-auto">
@@ -71,10 +69,8 @@ class Navigation extends React.Component {
                    My Events
                  </a>
                  <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                   {/* <a className="dropdown-item" href="">Organizer</a> */}
                    <Link to="/organized" className="dropdown-item">Organizer</Link>
                    <Link to="/attending" className="dropdown-item">Attendee</Link>
-                   {/* <a className="dropdown-item" href="#">Attendee</a> */}
                  </div>
               </li>
               <li className="nav-item">

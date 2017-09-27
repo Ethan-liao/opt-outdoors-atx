@@ -35,9 +35,7 @@ class Login extends React.Component {
 
     axios.post('/register', payload)
     .then(function(response) {
-      console.log('response from db:', response);
       if (response.status === 200) {
-        console.log("registration successful");
         alert("Registration successful. Please log in.");
       }
     }).catch(function(error) {
@@ -62,9 +60,8 @@ class Login extends React.Component {
 
     axios.post('/login', payload)
     .then(response => {
-      console.log('login response:', response);
       if (response.data.code === 200) {
-        console.log("Login successful");
+        // Login successful
         let user = {
           id: response.data.user.id,
           admin: response.data.user.admin,
@@ -78,10 +75,8 @@ class Login extends React.Component {
           events: {}
         })
       } else if (response.data.code === 204) {
-        console.log("Username password do not match");
         alert("username password do not match")
       } else {
-        console.log("Username does not exist");
         alert("Username does not exist");
       }
     }).catch(function(error) {

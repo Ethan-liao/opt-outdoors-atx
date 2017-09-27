@@ -31,21 +31,21 @@ router.post('/', (req, res, next) => {
         })
       })
       .catch(bcrypt.MISMATCH_ERROR, (result) => {
-        console.log('mismatch error');
+        // console.log('mismatch error');
         res.send({
           "code": 204,
           "success": "Email and password do not match."
         });
       })
       .catch((result) => {
-        console.log('other errors', result);
+        // console.log('other errors', result);
         res.send({
           "code": 204,
           "success": "Email and password do not match."
         });
       });
     } else {
-      console.log('email does not exist');
+      // console.log('email does not exist');
       res.send({
         "code":204,
         "success":"Email and password do not match."

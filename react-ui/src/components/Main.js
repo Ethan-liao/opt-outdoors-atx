@@ -31,13 +31,10 @@ class Main extends React.Component {
     return (
       <main>
         <Switch>
-          {/* <Route exact path='/' component={Public}/> */}
           <Route exact path='/' render={ ()  => <Public {...this.state}/> }/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/home' render={ ()  => <Home {...this.state}/> }/>
-          {/* <Route exact path='/home' component={Home}/> */}
           <Route exact path='/event/:id' component={EventPage}/>
-          {/* <Route exact path='/event/edit/:id' render={ ()  => <EditEvent {...this.state}/> }/> */}
           <Route exact path='/event/edit/:id' component={EditEvent}/>
           <Route exact path='/add' component={AddEvent}/>
           <Route exact path='/organized' component={EventsOrganized}/>

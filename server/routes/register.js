@@ -23,12 +23,12 @@ router.post('/', (req, res, next) => {
     .returning('id')
     .then((exists) => {
       if (!exists) {
-        console.log('email does not exist');
+        // console.log('email does not exist');
         knex('users')
         .insert(newUser)
         .returning('id')
         .then((id) => {
-          console.log('new id', id);
+          // console.log('new id', id);
           res.sendStatus(200);
         });
       } else {
@@ -38,7 +38,6 @@ router.post('/', (req, res, next) => {
     })
   })
   .catch((err) => {
-    console.log('error!');
     next(err);
   });
 });

@@ -19,20 +19,18 @@ class Home extends React.Component {
     axios.get('/privateEvents')
     .then(response => {
       if (response.data.code === 200) {
-        console.log("User has access to this page");
-        console.log('test:', response);
+        // "User has access to this page"
         let events = response.data.events;
         let obj = {};
         events.forEach((event) => {
           obj[`${event.id}-${event.created_at}`] = event;
         })
         this.setState({ events : obj});
-        console.log(this.state.events);
       } else if (response.data.code === 204) {
-        console.log("User does not have access to this page");
+        // User does not have access to this page
         this.setState({ redirect : true})
       } else {
-        console.log("Unknown error code received");
+        // Unknown error code received
         this.setState({ redirect : true})
       }
     }).catch(function(error) {

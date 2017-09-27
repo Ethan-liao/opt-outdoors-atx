@@ -28,17 +28,16 @@ class AddEvent extends React.Component {
     axios.get('/check').then(response => {
       console.log('initial', response);
       if (response.data.code === 200) {
-        console.log("User has access to this page");
+        // User has access to this page
         this.setState({ redirect: false});
       } else if (response.data.code === 403) {
-        console.log("User does not have access to this page");
+        // User does not have access to this page"
         this.setState({ redirect : true})
       } else {
-        console.log("Unknown error code received");
+        // Unknown error code received
         this.setState({ redirect : true})
       }
     }).catch(function(error) {
-      console.log('here');
       console.log(error);
     });
   }
@@ -55,15 +54,13 @@ class AddEvent extends React.Component {
     };
     axios.post('/event/add', payload)
     .then(response => {
-      console.log('response from db:', response);
       if (response.data.code === 200) {
-        console.log("event added");
+        // Event added
         this.setState({
           postSuccess: true
         })
       } else if (response.data.code === 204) {
-        console.log('error!');
-        console.log('response:', response);
+        // console.log('response:', response);
       }
     }).catch(function(error) {
       console.log(error);

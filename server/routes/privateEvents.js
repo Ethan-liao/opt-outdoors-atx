@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     .then(events => res.send({"code": 200, "events": events}))
     .catch(err => next(err))
   } else {
-    console.log('no session id');
+    // console.log('no session id');
     res.send({"code": 204, "success": "No session id exists."});
   }
 });
@@ -23,7 +23,7 @@ router.get('/attending', function(req, res, next) {
     .then(events => res.send({"code": 200, "events": events}))
     .catch(err => next(err))
   } else {
-    console.log('no session id');
+    // console.log('no session id');
     res.send({"code": 204, "success": "No session id exists."});
   }
 });
@@ -35,7 +35,7 @@ router.get('/organized', function(req, res, next) {
     .then(events => res.send({"code": 200, "events": events}))
     .catch(err => next(err))
   } else {
-    console.log('no session id');
+    // console.log('no session id');
     res.send({"code": 204, "success": "No session id exists."});
   }
 });

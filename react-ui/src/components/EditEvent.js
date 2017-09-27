@@ -30,7 +30,6 @@ class EditEvent extends React.Component {
     let url = this.props.match.url;
     axios.get(url).then(response => {
       if (response.data.code === 200) {
-        console.log('events response:', response);
         let event = response.data.event[0];
         this.setState({
           event: event,
@@ -43,13 +42,14 @@ class EditEvent extends React.Component {
           activity: event.activity
         });
       } else if (response.data.code === 403) {
-        console.log('user not authorized to view page', );
+        // User not authorized to view page
         this.setState({ redirect : true })
       } else {
-        console.log("There was an error retrieving data");
+        // Error retrieving data
+        this.setState({ redirect : true })
       }})
       .catch(error => {
-      console.log('error on mount:', error);
+      // console.log('error on mount:', error);
       this.setState({ redirect : true })
     });
   }
@@ -69,21 +69,19 @@ class EditEvent extends React.Component {
 
     axios.patch(`/event/${this.state.event.id}`, payload)
     .then(response => {
-      console.log('response from db:', response);
       if (response.data.code === 200) {
-        console.log("event edited");
+        // Event edited
         this.setState({ submit: true })
       } else if (response.data.code === 204) {
-        console.log('Error making change to the event', response);
+        // Error making change to the event
       } else if (response.data.code === 403) {
-        console.log('response!', response);
+        // Not authorized
         this.setState({ redirect : true })
       } else {
-        console.log('User not authorized to make changes');
+        // User not authorized to make changes
         this.setState({ redirect: true })
       }
     }).catch(error => {
-      console.log('error on patch:', error);
       this.setState({ redirect : true })
     });
   }

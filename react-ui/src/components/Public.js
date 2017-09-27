@@ -15,7 +15,6 @@ class Public extends React.Component {
   componentWillMount() {
     axios.get('/events')
     .then((response) => {
-      console.log(response);
       let events = response.data.events;
       let obj = {};
       events.forEach((event) => {

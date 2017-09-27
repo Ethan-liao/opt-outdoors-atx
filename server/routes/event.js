@@ -11,7 +11,7 @@ router.get('/:id', function(req, res, next) {
     .then(event => res.send({"code": 200, "event": event}))
     .catch(err => next(err))
   } else {
-    console.log('no session id');
+    // console.log('no session id');
     res.send({"code": 204, "success": "No session id exists."});
   }
 });
@@ -25,7 +25,7 @@ router.get('/:id/attendees', function(req, res, next) {
     .then(attendees => res.send({"code": 200, "attendees": attendees}))
     .catch(err => next(err))
   } else {
-    console.log('no session id');
+    // console.log('no session id');
     res.send({"code": 204, "success": "No session id exists."});
   }
 });
@@ -44,40 +44,24 @@ router.post('/add', (req, res, next) => {
       user_id: Number.parseInt(req.session.id),
       event_id: Number.parseInt(id)
     })).then(() => {
-      console.log('event addded');
+      // console.log('event addded');
       res.send({"code": 200, "success": "event added to db"})
     }).catch((err) => {
-      console.log('error, event not added', err);
+      // console.log('error, event not added', err);
       res.send({"code": 204, "success": "Event not added."});
     });
   } else {
-    console.log('no session id');
+    // console.log('no session id');
     res.send({"code": 403, "success": "No session id exists."});
   }
 });
 
-// router.get('/check', function(req, res, next) {
-//   if (req.session.id) {
-//     knex('users')
-//     .returning('*')
-//     .where('users.id', req.session.id)
-//     .then(user => res.send({"code": 200, "user": user}))
-//     .catch(err => next(err))
-//   } else {
-//     console.log('no session id');
-//     res.send({"code": 403, "success": "No session id exists."});
-//   }
-// });
-
 router.post('/:id/rsvp', (req, res, next) => {
-  console.log(req.session.id);
-  console.log(req.params.id);
   knex('events_users')
   .returning('user_id')
   .where('user_id', Number.parseInt(req.session.id))
   .andWhere('event_id', Number.parseInt(req.params.id))
   .then((exists) => {
-    console.log('exists:', exists);
     if (!exists[0]) {
       knex('events_users')
       .returning('*')
@@ -95,7 +79,7 @@ router.post('/:id/rsvp', (req, res, next) => {
           "last": req.session.last,
         })
       }).catch((err) => {
-        console.log('error, attendee not added', err);
+        // console.log('error, attendee not added', err);
         res.send({"code": 204, "message": "error adding attendee to db"});
       });
     } else {
@@ -111,20 +95,19 @@ router.delete('/:id/leave', (req, res, next) => {
   .andWhere('event_id', Number.parseInt(req.params.id))
   .del()
   .then(() => {
-    console.log('attendee removed from event');
+    // console.log('attendee removed from event');
     res.send({
       "code": 200,
       "message": "attendee removed from event"
     })
   }).catch((err) => {
-    console.log('error, attendee not removed', err);
+    // console.log('error, attendee not removed', err);
     res.send({"code": 204, "message": "error removing attendee from db"});
   });
 });
 
 router.delete('/:id', (req, res, next) => {
   let id = Number.parseInt(req.params.id);
-
   knex('events_comments').where('event_id', id).del().then(() => {
     knex('events_users').where('event_id', id).del().then(() => {
       knex('events').where('id', id).del().then(() => {
@@ -142,23 +125,20 @@ router.get('/edit/:id', (req, res, next) => {
   if (req.session.id !== undefined) {
     let id = Number.parseInt(req.params.id);
     knex('events').where('id', id).returning('*').then((event) => {
-      console.log(event[0]);
       if (req.session.id === event[0].organizer) {
-        console.log('event data has been pulled from db');
+        // console.log('event data has been pulled from db');
         res.send({"code": 200, "event": event, "message": "event data has been pulled from db"})
       } else {
         // user id and event id don't match
-        console.log('user id and event id dont match');
         res.status(403)
         res.send({"code": 403, "message": "not authorized"});
       }
     }).catch((error) => {
-      console.log('error, event data not retrieved', error);
+      // console.log('error, event data not retrieved', error);
       res.send({"code": 204, "message": "event data not retrieved"});
     });
   } else {
     // no session.id -- not authorized
-    console.log('error, not authorized to view');
     res.status(403)
     res.send({"code": 403, "message": "not authorized"});
   }
@@ -166,7 +146,6 @@ router.get('/edit/:id', (req, res, next) => {
 
 router.patch('/:id', (req, res, next) => {
   let id = Number.parseInt(req.params.id);
-  // Add auth check here
 
   if (req.session.id === req.body.organizer) {
     knex('events').where('id', id)
@@ -183,17 +162,17 @@ router.patch('/:id', (req, res, next) => {
         location: req.body.location
       }).returning('*')
       .then((event) => {
-        console.log('event data has been pulled from db');
+        // console.log('event data has been pulled from db');
         res.send({"code": 200, "event": event, "message": "event data has been updated in db"})
       })
       .catch((err) => {
-        console.log('error, event data not updated', err);
+        // console.log('error, event data not updated', err);
         res.send({"code": 204, "message": "error, event data not updated"});
       });
     });
   } else {
     //not authorized
-    console.log('error, event data not updated', err);
+    // console.log('error, event data not updated', err);
     req.session = null;
     res.send({"status": 403, "message": "not authorized to submit changes"});
   }

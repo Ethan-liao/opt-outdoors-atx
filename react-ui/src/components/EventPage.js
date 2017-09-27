@@ -33,7 +33,7 @@ class EventPage extends React.Component {
         event['id'] = eventID;
         this.setState({event: event});
       } else {
-        console.log("user is not logged in");
+        // User is not logged in
         this.setState({redirect: true})
       }
     }).catch(function(error) {
@@ -49,7 +49,7 @@ class EventPage extends React.Component {
         })
         this.setState({ attendees : obj });
       } else {
-        console.log("user is not logged in");
+        // User is not logged in
         this.setState({redirect: true})
       }
     }).catch(function(error) {
@@ -99,7 +99,7 @@ class EventPage extends React.Component {
        // clear the comment form
        this.refs.newComment.value = ''
     } else if (response.data.code === 204) {
-      console.log('response:', response);
+      console.log('Error occurred posting comment');
     }})
     .catch(function(error) {
       console.log(error);
@@ -125,7 +125,7 @@ class EventPage extends React.Component {
          // clear the comment form
          this.refs.newComment.value = ''
       } else if (response.data.code === 204) {
-        console.log('response:', response);
+        console.log('Error occured joining event');
       }})
       .catch(function(error) {
         console.log(error);
@@ -181,29 +181,23 @@ class EventPage extends React.Component {
                     <p className="col-sm-3">Organizer:</p>
                     <p className="col-sm-9">{details.first} {details.last}</p>
                   </div>
-
                   <div className="row">
                     <p className="col-sm-3">Date:</p>
                     <p className="col-sm-9"><Moment format="dddd, MMMM Do">{details.date}</Moment></p>
                   </div>
-
                   <div className="row">
                     <p className="col-sm-3">Location:</p>
                     <p className="col-sm-9">{details.location}</p>
                   </div>
-
                   <div className="row">
                     <p className="col-sm-3">Primary Activity:</p>
                     <p className="col-sm-9">{details.activity}</p>
                   </div>
-
                   <div className="row">
                     <p className="col-sm-3">Details:</p>
                     <p className="col-sm-9">{details.description}</p>
                   </div>
-
                 </div>
-                {/* <div className="col-sm-1 py-3"></div> */}
                 <div className="col-sm-4 py-3 form-control">
                   <h5><strong>Attendees ({Object.keys(this.state.attendees).length})</strong></h5>
                   <div>
@@ -218,12 +212,10 @@ class EventPage extends React.Component {
           <div className="row">
             <div className="col-sm-1"></div>
             <div className="col-sm-10">
-
               <h4 className="text-center pt-3"><strong>Message Board</strong></h4>
               <div>
                 <form onSubmit={this.submitComment}>
                   <div className="form-group">
-                    {/* <label htmlFor="newComment">Leave a message:</label> */}
                     <div className="row">
                       <div className="col-sm-10">
                         <input required name="newComment" type="text" className="form-control" id="newComment" onChange={this.handleInputChange} ref="newComment" placeholder="Ask questions, post your thoughts, etc."/>
@@ -238,10 +230,8 @@ class EventPage extends React.Component {
               <div className="form-control mb-3">
                 {Object.keys(this.state.comments).map(key => <Comments key={key} details={this.state.comments[key]}/>)}
               </div>
-
             </div>
             <div className="col-sm-1"></div>
-
           </div>
         </div>
       </div>
